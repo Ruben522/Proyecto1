@@ -1,0 +1,1 @@
+import { compararPuntuacion } from "./biblioteca/calculadoraBaloncesto.js";
