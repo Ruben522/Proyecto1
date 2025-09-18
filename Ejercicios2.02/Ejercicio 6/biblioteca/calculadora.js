@@ -7,7 +7,7 @@ function comprobarNumero(numero) {
         console.log("No has escrito un número");
         return null;
     }
-    if (!Number.isInteger(numero)) {
+    if (numero % 1 !== 0) {
         console.log("El número debe ser entero");
         return null;
     }

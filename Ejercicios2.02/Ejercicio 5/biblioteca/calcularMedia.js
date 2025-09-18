@@ -11,6 +11,7 @@ function comprobarNumero(numero) {
         console.log("El número debe ser positivo");
         return null
     }
+    
     return numero;
 }
 

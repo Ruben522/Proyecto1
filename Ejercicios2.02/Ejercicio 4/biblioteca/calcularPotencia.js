@@ -7,9 +7,9 @@ function comprobarNumero(numero) {
         console.log("No has escrito un número");
         return null
     }
-    if (!Number.isInteger(numero)) {
+    if (numero % 1 !== 0) {
         console.log("El número debe ser entero");
-        return null
+        return null;
     }
 
     return numero;
@@ -18,12 +18,12 @@ function comprobarNumero(numero) {
 // Calcula la potencia de un número elevado a otro.
 // Si los números son válidos, devuelve el resultado con un mensaje por consola.
 // Si uno de los números no es válido, devuelve null.
-function calcularPotencia (base, exponente) {
+function calcularPotencia(base, exponente) {
     let baseValidada = comprobarNumero(base);
     let exponenteValidado = comprobarNumero(exponente);
 
-    if (baseValidada === null) return 
-    
+    if (baseValidada === null) return
+
     if (exponenteValidado === null) return
 
     let resultado = 1;
