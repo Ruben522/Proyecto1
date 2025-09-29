@@ -1,45 +1,34 @@
 "use strict";
 
-const discente = (id, nombre, apellidos, aficiones, notas) => {
+// Simula la creación de un objeto discente con varios atributos y métodos.
+// Los métodos muestran información sobre el discente.
+const discente = () => {
 	return {
-		id: id,
-		nombre: nombre,
-		apellidos: apellidos,
-		aficiones: [],
+		id: 1,
+		nombre: "Ruben",
+		apellidos: "Garcia Fernandez",
+		aficiones: ["deporte", "jugar", "leer"],
 		notas: {
-			primera: nota1,
-			segunda: nota2,
-			tercera: nota3,
+			primera: 2,
+			segunda: 8,
+			tercera: 7,
 		},
+
+		calcularMedia: function () {
+			return (this.notas.primera + this.notas.segunda + this.notas.tercera) / 3;
+		},
+
+		imprimirAficiones: function () {
+			return this.aficiones;
+		},
+
+		imprimirInforme: function () {
+			console.log(`El discenente con nombre ${this.nombre} y apellidos ${this.apellidos} 
+			tiene las siguientes aficiones: ${this.imprimirAficiones()}. 
+			Además, tiene estas notas: Primera: ${this.notas.primera}, Segunda: ${this.notas.segunda}, Tercera: ${this.notas.tercera}  
+			con una nota media de: ${this.calcularMedia().toLocaleString("es-ES")}.`);
+		}
 	};
 };
 
-const calcularMedia = (notas) => {
-	let suma = 0;
-
-	for (let i = 0; i < notas.length; i++) {
-		suma += notas[i];
-	}
-	return suma / notas.length;
-};
-
-const imprimirAficiones = (discente) => {
-	let aficiones = "";
-	for (let i = 0; i < discente.aficiones.length; i++) {
-		aficiones += discente.aficiones.length[i];
-	}
-	return aficiones;
-};
-
-const imprimirInforme = (discente) => {
-	console.log(`El discenente con nombre ${
-		discente.nombre
-	} y apellidos ${discente.apellidos()} tiene las siguientes aficiones:
-        ${imprimirAficiones(
-					discente
-				)} Además tiene estas notas ${discente.notas()} con una nota media de: ${calcularMedia(
-		discente
-	)}`);
-};
-
-export { discente, calcularMedia, imprimirAficiones, imprimirInforme };
+export { discente };
