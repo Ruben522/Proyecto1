@@ -92,6 +92,7 @@ const usuarios = [
   },
 ];
 
+// Devuelve el array original usuarios.
 const devolverArrayOriginal = () => {
   return usuarios;
 }
