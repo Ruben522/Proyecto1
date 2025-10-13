@@ -1,0 +1,16 @@
+h1 {
+  text-align: center;
+  font-size: 1.8em;
+  color: #4a249d;
+  margin-bottom: 15px;
+}
+
+.contenedor-contador {
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  text-align: center;
+  background-color: #8b4a00;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
