@@ -1,5 +1,6 @@
 import React from "react";
 
+// Componente discente que muestra su información.
 const Discente = ({ id, nombre, apellidos, curso, aficiones, comida }) => {
   return (
     <div className="discente">
