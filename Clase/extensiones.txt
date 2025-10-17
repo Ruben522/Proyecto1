@@ -1,4 +1,0 @@
-ES7+ React/Redux/React-Native snippets  v4.4.3 
-Liver server
-Material Icon Theme  v5.27.0 
-Prettier - Code formatter  v11.0.0 

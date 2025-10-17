@@ -1,10 +1,17 @@
 .contenido-bloqueado {
-    color: red;
-    font-weight: bold;
-      font-style: italic;
+	color: red;
+	font-weight: bold;
+	font-style: italic;
 }
 
 .primo {
-  background-color: red;
-  font-weight: bold;
+	background-color: red;
+	font-weight: bold;
+}
+
+p {
+	height: 30px;
+	width: 30px;
+	border-color: brown;
+	color: blue;
 }

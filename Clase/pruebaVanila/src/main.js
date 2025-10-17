@@ -1,5 +1,0 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
-import { multiplicar, dividir, restar, sumar, multi } from '../ReposiJuanCarlos/DWC_2025/Vanilla/UT01/bibliotecas/calculadora.js'
