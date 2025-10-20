@@ -1,24 +1,35 @@
 "use strict";
 
-import { censurarContenido } from "./biblioteca/ejercicio1.js";
-import { crearTabla, resaltarNumeroPrimo } from "./biblioteca/ejercicio2.js";
-import {
-	crearParrafos,
-	cambiarAleatoriamente,
-} from "./biblioteca/ejericio3.js";
+import { mostrarEnWeb, censurarContenido } from "./biblioteca/ejercicio1.js";
+import { crearTabla, resaltarNumeroPrimo, mostrarNumerosPrimos } from "./biblioteca/ejercicio2.js";
+import { crearParrafos, cambiarAleatoriamente } from "./biblioteca/ejericio3.js";
+import { iniciarCarrusel } from "./biblioteca/ejercicio4.js";
 
-setTimeout(() => {
-	let cuerpo = document.body.innerHTML;
-	let cuerpoCensurado = censurarContenido(cuerpo);
+// Ejercicio 1.
+/*
+let cuerpo = document.body.innerHTML;
+let cuerpoCensurado = censurarContenido(cuerpo);
+mostrarEnWeb(cuerpoCensurado);
+*/
 
-	document.body.innerHTML = cuerpoCensurado;
-}, 2000);
+// Ejercicio 2.
+/*
+mostrarNumerosPrimos();
+*/
 
-crearTabla();
-
-setTimeout(() => {
-	resaltarNumeroPrimo();
-}, 2000);
-
+// Ejercicio 3.
+/*
 crearParrafos();
-cambiarAleatoriamente();
+setInterval(cambiarAleatoriamente, 1000);
+*/
+
+// Ejercicio 4.
+/*
+let imagenes = [
+	"./imgs/broly.jpg",
+	"./imgs/gogeta.jpg",
+	"./imgs/goku.jpg",
+	"./imgs/vegeta.jpg"
+];
+iniciarCarrusel(imagenes);
+*/

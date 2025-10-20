@@ -1,5 +1,6 @@
-"use strict"
+"use strict";
 
+// Crea una tabla de 10x10 con números del 1 al 100.
 const crearTabla = () => {
     let tabla = document.createElement("table");
     let numero = 1;
@@ -15,6 +16,7 @@ const crearTabla = () => {
     document.body.appendChild(tabla);
 };
 
+// Verifica si el número es primo.
 const esPrimo = (numero) => {
   if (numero < 2) return false;
   for (let i = 2; i < numero; i++) {
@@ -23,9 +25,11 @@ const esPrimo = (numero) => {
   return true;
 };
 
+// Resalta el número que es primo.
 const resaltarNumeroPrimo = () => {
     let celdas = document.querySelectorAll("td")
     celdas.forEach((celda) => {
+        // Hacemos un parseInt porque el contenido de la celda es un string.
         let numero = parseInt(celda.textContent);
         if (esPrimo(numero)){
             celda.classList.add("primo");
@@ -33,4 +37,10 @@ const resaltarNumeroPrimo = () => {
     });
 };
 
-export { crearTabla, resaltarNumeroPrimo };
+// Muestra el resultado en la web después de 2 segundos.
+const mostrarNumerosPrimos = () => {
+    crearTabla();
+    setTimeout(resaltarNumeroPrimo, 2000);
+};
+
+export { crearTabla, resaltarNumeroPrimo, mostrarNumerosPrimos };
