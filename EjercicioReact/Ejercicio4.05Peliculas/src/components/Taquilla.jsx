@@ -1,13 +1,18 @@
 "use strict";
 import React from "react";
-import "./Taquilla.css";
 
+// Componente que representa la taquilla de una película.
+// Recibe como props: recaudación.
 const Taquilla = ({ recaudacion }) => {
+
+  const recaudacionFormateada = new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "EUR",
+  }).format(recaudacion);
 
   return (
     <div className="taquilla">
-      <h3>Taquilla: </h3>
-      <p>{recaudacion}</p>
+      <p>{recaudacionFormateada}</p>
     </div>
   );
 };
