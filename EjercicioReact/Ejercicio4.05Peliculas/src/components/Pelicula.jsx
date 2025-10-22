@@ -5,29 +5,27 @@ import Contenedor from "./Contenedor";
 import "./Pelicula.css";
 import Taquilla from "./Taquilla";
 
-
 // Componente que representa una película:
 // Recibe como props: título, dirección, cartel, recaudación, descripción y los intérpretes (children).
-const Pelicula = ({ titulo, direccion, cartel, recaudacion, descripcion, children }) => {
+const Pelicula = ({
+	titulo,
+	direccion,
+	cartel,
+	recaudacion,
+	descripcion,
+	children,
+}) => {
 	const recaudacionRef = useRef(null);
 	const elencoRef = useRef(null);
 
-	// Función para mostrar u ocultar el elenco de la película cambiando el estilo display.
+	// Función para mostrar u ocultar el elenco de la película cambiando el estilo.
 	const mostrarElenco = () => {
-		if (elencoRef.current.style.display === "none") {
-			elencoRef.current.style.display = "block";
-		} else {
-			elencoRef.current.style.display = "none";
-		}
+		elencoRef.current.classList.toggle("ocultar");
 	};
 
-	// Función para mostrar u ocultar la recaudación de la película cambiando el estilo display.
+	// Función para mostrar u ocultar la recaudación de la película cambiando el estilo.
 	const mostrarRecaudacion = () => {
-		if (recaudacionRef.current.style.display === "none") {
-			recaudacionRef.current.style.display = "block";
-		} else {
-			recaudacionRef.current.style.display = "none";
-		}
+		recaudacionRef.current.classList.toggle("ocultar");
 	};
 
 	return (
@@ -37,24 +35,31 @@ const Pelicula = ({ titulo, direccion, cartel, recaudacion, descripcion, childre
 			<img src={cartel} className="pelicula-cartel" />
 			<p>{descripcion}</p>
 			<div className="botones">
-				<button onClick ={() => {
-					mostrarElenco();
-				}}>Elenco</button>
-				<button onClick ={() => {
-					mostrarRecaudacion();
-				}}>Taquilla</button>
+				<button
+					onClick={() => {
+						mostrarElenco();
+					}}
+				>
+					Elenco
+				</button>
+				<button
+					onClick={() => {
+						mostrarRecaudacion();
+					}}
+				>
+					Taquilla
+				</button>
 			</div>
 			{/* Contenedor del elenco de la película, inicialmente oculto. */}
-			<div ref={elencoRef} style={{ display: "none" }}>
+			<div ref={elencoRef} className="ocultar">
 				{children}
 			</div>
 
 			{/* Contenedor de la recaudación de la película, inicialmente oculto. */}
-			<div ref={recaudacionRef} style={{ display: "none" }}>
+			<div ref={recaudacionRef} className="ocultar">
 				<Taquilla recaudacion={recaudacion} />
 			</div>
 		</div>
-
 	);
 };
 
