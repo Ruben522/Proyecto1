@@ -1,5 +1,6 @@
 import React from "react";
-import Menu from "./pages/menu/Menu";
+import Menu from "./components/Menu";
+import Rutas from "./routes/Rutas";
 import Contenedor from "./components/Contenedor";
 import Cabecera from "./components/Cabecera";
 import Contenido from "./components/Contenido";
