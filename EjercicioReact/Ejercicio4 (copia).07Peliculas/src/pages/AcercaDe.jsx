@@ -2,20 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./AcercaDe.css";
 
-<<<<<<< HEAD
-// Componente que muestra información del creador y la fecha de modificación.
-=======
 // Componente que muestra la página donde se presenta información sobre la empresa.
->>>>>>> 7cc16272918cb577a6819f6f11140ce134a8a33a
 const AcercaDe = () => {
 	const navigate = useNavigate();
 	return (
 		<div className="acerca-de">
-<<<<<<< HEAD
-			<h2>Esta es la aplicación de Rubén, modificada el 28 de octubre de 2025.</h2>
-=======
 			<h2>Esta es la página de Acerca De.</h2>
->>>>>>> 7cc16272918cb577a6819f6f11140ce134a8a33a
 			<button onClick={() => navigate("/")}>Inicio</button>
 		</div>
 	);
