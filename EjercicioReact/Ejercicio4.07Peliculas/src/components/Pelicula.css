@@ -9,14 +9,12 @@
 }
 
 .pelicula-titulo {
-	text-align: center;
 	color: #444;
 	font-size: 2.5em;
 	margin-bottom: 5px;
 }
 
 .pelicula-direccion {
-	text-align: center;
 	font-style: italic;
 	color: #777;
 	margin-bottom: 20px;
@@ -24,9 +22,10 @@
 
 .pelicula-cartel {
 	display: block;
-	margin: 0 auto 20px;
 	max-width: 30%;
 	border-radius: 8px;
+	height: 10%;
+	width: auto;
 }
 
 .ocultar {

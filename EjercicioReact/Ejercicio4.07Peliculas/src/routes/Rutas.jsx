@@ -6,6 +6,10 @@ import Interpretes from "../pages/Interpretes";
 import Galeria from "../pages/Galeria";
 import AcercaDe from "../pages/AcercaDe";
 import Error from "../pages/Error";
+import TitulosGaleria from "../pages/menu/submenu/TitulosGaleria";
+import InterpretesGaleria from "../pages/menu/submenu/InterpretesGaleria";
+import DirectoresGaleria from "../pages/menu/submenu/DirectoresGaleria";
+import PeliculaDetalles from "../pages/PeliculaDetalles";
 
 // Componente de rutas de la aplicación.
 const Rutas = () => {
@@ -13,8 +17,13 @@ const Rutas = () => {
 		<Routes>
 			<Route path="/" element={<Inicio />} />
 			<Route path="/peliculas" element={<Peliculas />} />
+			<Route path="/peliculas/peliculadetalle/:id" element={<PeliculaDetalles />} />
 			<Route path="/interpretes" element={<Interpretes />} />
-			<Route path="/galeria" element={<Galeria />} />
+			<Route path="/galeria" element={<Galeria />} >
+				<Route path="titulo" element={<TitulosGaleria />} />
+				<Route path="interprete" element={<InterpretesGaleria />} />
+				<Route path="director" element={<DirectoresGaleria />} />
+			</Route>
 			<Route path="/acerca-de" element={<AcercaDe />} />
 			/* Ruta para manejar errores en caso de que no se encuentre la página */
 			<Route path="*" element={<Error />} />
