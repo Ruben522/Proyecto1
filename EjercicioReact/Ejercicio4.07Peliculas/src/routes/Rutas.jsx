@@ -20,6 +20,7 @@ const Rutas = () => {
 			<Route path="/peliculas/peliculadetalle/:id" element={<PeliculaDetalles />} />
 			<Route path="/interpretes" element={<Interpretes />} />
 			<Route path="/galeria" element={<Galeria />} >
+			/* Subrutas para la galería */
 				<Route path="titulo" element={<TitulosGaleria />} />
 				<Route path="interprete" element={<InterpretesGaleria />} />
 				<Route path="director" element={<DirectoresGaleria />} />

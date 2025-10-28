@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 
+// Componente que representa el footer de la aplicación.
 const Footer = () => {
 	return (
 		<div className="footer">

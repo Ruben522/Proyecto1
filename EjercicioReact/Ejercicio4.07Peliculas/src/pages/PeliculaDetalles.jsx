@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import peliculasJSON from "./../assets/objetos/peliculas.json";
 
+// Componente que muestra los detalles de una película que se
+// referencia por el id pasado por la URL.
 const PeliculaDetalles = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -15,17 +17,20 @@ const PeliculaDetalles = () => {
     return (
         <div className="pelicula-detalles">
             <h2>{nombre}</h2>
-            <p><strong>Director:</strong> {director}</p>
-            <p><strong>Clasificación:</strong> {clasificacion}</p>
-            <p><strong>Recaudación:</strong> {recaudacion}</p>
-            <p><strong>Nota:</strong> {nota}/10</p>
-            <img src={cartelera} alt={nombre} width="250" />
+            <p>Director: {director}</p>
+            <p>Clasificación: {clasificacion}</p>
+            <p>Recaudación: {recaudacion}</p>
+            <p>Nota: {nota}/10</p>
+            <img src={cartelera}/>
             <h3>Intérpretes</h3>
-            <ul>
-                {actores.map((actores, index) => (
-                    <li key={index}>{actores.nombre}</li>
-                ))}
-            </ul>
+            {actores.map((actor, index) => (
+                <div key={index}>
+                    <p>{actor.nombre}</p>
+                    <p>{actor.fechaNacimiento}</p>
+                    <p>{actor.biografia}</p>
+                    <img src={actor.imagen} alt={actor.nombre} />
+                </div>
+            ))}
             <button onClick={() => navigate("/")}>Inicio</button>
         </div>
     );

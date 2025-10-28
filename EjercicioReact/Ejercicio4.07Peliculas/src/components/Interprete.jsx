@@ -2,8 +2,8 @@
 import React from "react";
 import "./Interprete.css";
 
-//Componente que representa un intérprete de una película.
-//Recibe como props: nombre, foto y la descripción del personaje (children).
+// Componente que representa un intérprete de una película.
+// Recibe como props: nombre, foto y la descripción del personaje (children).
 const Interprete = ({ nombre, foto, children }) => {
 	return (
 		<div className="interprete">

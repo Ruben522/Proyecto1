@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Componente que mostrará los títulos de las películas en la galería.
 const TitulosGaleria = () => {
     return (
         <div className='titulos-galeria'>

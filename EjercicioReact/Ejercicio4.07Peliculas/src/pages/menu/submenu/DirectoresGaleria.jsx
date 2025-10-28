@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Componente que mostrará los directores de las películas en la galería.
 const DirectoresGaleria = () => {
     return (
         <div className='directores-galeria'>

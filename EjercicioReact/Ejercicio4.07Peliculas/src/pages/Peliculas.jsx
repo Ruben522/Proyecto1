@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Peliculas.css";
 import peliculasJSON from "./../assets/objetos/peliculas.json";
 
+// Componente de peliculas que muestra una lista de películas con enlaces para sus detalles
 const Peliculas = () => {
 	const navigate = useNavigate();
 

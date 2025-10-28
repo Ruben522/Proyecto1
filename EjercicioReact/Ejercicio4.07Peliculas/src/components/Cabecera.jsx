@@ -1,6 +1,7 @@
 import React from "react";
 import "./Cabecera.css";
 
+// Componente que representa la cabecera de la aplicación.
 const Cabecera = () => {
 	return (
 		<div className="cabecera">
