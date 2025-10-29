@@ -14,16 +14,12 @@ const Rutas = () => {
 			<Route path="/" element={<Inicio />} />
 			<Route path="/peliculas" element={<Peliculas />} />
 			<Route path="/interpretes" element={<Interpretes />} />
-<<<<<<< HEAD
 			<Route path="/galeria" element={<Galeria />} >
 			/* Subrutas para la galería */
 				<Route path="titulo" element={<TitulosGaleria />} />
 				<Route path="interprete" element={<InterpretesGaleria />} />
 				<Route path="director" element={<DirectoresGaleria />} />
 			</Route>
-=======
-			<Route path="/galeria" element={<Galeria />} />
->>>>>>> 7cc16272918cb577a6819f6f11140ce134a8a33a
 			<Route path="/acerca-de" element={<AcercaDe />} />
 			/* Ruta para manejar errores en caso de que no se encuentre la página */
 			<Route path="*" element={<Error />} />
