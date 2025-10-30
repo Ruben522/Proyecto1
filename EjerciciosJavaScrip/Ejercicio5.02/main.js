@@ -2,14 +2,14 @@
 
 import { alternarVista } from "./biblioteca/ejercicio1.js";
 
-window.onload; {
-    const elementos = document.getElementsByClassName("acordeon-titulo");
+window.onload = () => {
+    const titulos = document.getElementsByClassName("acordeon-titulo");
 
-    for (let i = 0; i < elementos.length; i++) {
-        const element = elementos[i];
-        element.addEventListener("click", (evento) =>{
-            alternarVista(element);
+    for (let i = 1; i < titulos.length; i + 2) {
+        titulos[i].addEventListener("click", () =>{
+            alternarVista(titulos[i]);
         });
     }
+    
 
 }; // Fin de window.onload
