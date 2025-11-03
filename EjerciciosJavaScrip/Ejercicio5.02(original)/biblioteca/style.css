@@ -1,0 +1,23 @@
+.ocultar {
+    display: none;
+}
+.pestana {
+  cursor: pointer;
+  padding: 8px;
+  background-color: lightgray;
+}
+
+.pestanaActiva {
+  background-color: gray;
+  color: white;
+}
+
+.contenido {
+  display: none;
+  padding: 10px;
+  border: 1px solid gray;
+}
+
+.mostrar {
+  display: block;
+}
