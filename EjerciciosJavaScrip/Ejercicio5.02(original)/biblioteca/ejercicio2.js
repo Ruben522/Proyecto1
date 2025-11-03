@@ -1,25 +1,27 @@
 "use strict";
 
+// Cambia la pestaña activa y muestra su contenido.
 const cambiarPestana = (evento) => {
-  const elemento = evento.target;
+	// Usamos .target para obtener el elemento exacto que fue clicado.
+	const elementoClicado = evento.target;
 
-  const pestanas = document.getElementsByClassName("pestana");
-  const contenidos = document.getElementsByClassName("contenido");
+	const pestanas = document.getElementsByClassName("pestana");
+	const contenidos = document.getElementsByClassName("contenido");
 
-  // Primero quitamos las clases activas de todas
-  for (let i = 0; i < pestanas.length; i++) {
-    pestanas[i].classList.remove("pestanaActiva");
-    contenidos[i].classList.remove("mostrar");
-  }
+	// Quitamos la clase activa.
+	for (let i = 0; i < pestanas.length; i++) {
+		pestanas[i].classList.remove("pestanaActiva");
+		contenidos[i].classList.remove("mostrar");
+	}
 
-  // Luego activamos solo la pestaña clicada y su contenido
-  for (let i = 0; i < pestanas.length; i++) {
-      if (elemento === pestanas[i]) {
-      pestanas[i].classList.add("pestanaActiva");
-      contenidos[i].classList.add("mostrar");
-      break; // Ya lo encontramos, no hace falta seguir
-    }
-    }
+	// Mostramos la pestaña clicada y su contenido.
+	for (let i = 0; i < pestanas.length; i++) {
+		if (elementoClicado === pestanas[i]) {
+			pestanas[i].classList.add("pestanaActiva");
+			contenidos[i].classList.add("mostrar");
+			break;
+		}
+	}
 };
 
 export { cambiarPestana };
