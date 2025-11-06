@@ -1,5 +1,7 @@
 "use strict";
 
+import { imagenesAleatorio, crearPanel } from "./biblioteca/ejercicio1.js";
+
 let imagenes = [
 	"./images/1-1.jpg",
 	"./images/1-2.jpg",
@@ -11,3 +13,7 @@ let imagenes = [
 	"./images/3-2.jpg",
 	"./images/3-3.jpg",
 ];
+
+let imagenesRandomizadas = imagenesAleatorio(imagenes);
+
+crearPanel(imagenesRandomizadas);
