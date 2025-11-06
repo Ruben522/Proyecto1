@@ -1,30 +1,28 @@
 .color {
-	width: 80px;
+	width: 40px;
 	height: 40px;
-	text-align: center;
 	cursor: pointer;
 	border: 1px solid #000;
+	border-radius: 100px;
 }
 
-#rojo {
+#red {
 	background: red;
-	color: white;
 }
-#verde {
+#green {
 	background: green;
-	color: white;
 }
-#azul {
+#blue {
 	background: blue;
-	color: white;
 }
-#blanco {
+#white {
 	background: white;
-	color: black;
 }
-#negro {
+#black {
 	background: black;
-	color: white;
+}
+#yellow {
+	background: yellow;
 }
 
 .lienzo table {
@@ -35,4 +33,13 @@
 	width: 10px;
 	height: 10px;
 	border: 1px solid #ddd;
+}
+
+.borrar {
+	margin-top: 1px;
+	border-radius: 10px;
+	border: 1px solid #000;
+	width: 5%;
+	text-align: center;
+	cursor: pointer;
 }

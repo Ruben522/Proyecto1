@@ -1,5 +1,6 @@
 "use strict";
 
+// Crea una tabla con las medidas que se indiquen por parámetros.
 const construirLienzo = (alto, ancho) => {
 	const tabla = document.createElement("table");
 	for (let i = 0; i < alto; i++) {
@@ -13,4 +14,12 @@ const construirLienzo = (alto, ancho) => {
 	document.getElementById("lienzo").appendChild(tabla);
 };
 
-export { construirLienzo };
+// Borra el lienzo cambiando todas las celdas a blanco.
+const borrarLienzo = () => {
+	const lienzo = document.getElementById("lienzo");
+	const celdas = lienzo.getElementsByTagName("td");
+	for (let i = 0; i < celdas.length; i++) {
+		celdas[i].style.background = "white";
+	}
+};
+export { construirLienzo, borrarLienzo };

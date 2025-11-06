@@ -1,31 +1,48 @@
 "use strict";
 
-import { construirLienzo } from "./biblioteca/ejercicio1.js";
+import { borrarLienzo, construirLienzo } from "./biblioteca/ejercicio1.js";
 
-construirLienzo(30, 30);
+window.onload = () => {
+	construirLienzo(30, 30);
 
-let colorSeleccionado = "blanco";
-let pintando = false;
+	// He decidido usar variables porque me permite controlar
+	// fácilmente el estado en el que se encuentra el programa.
 
-const colores = document.getElementById("colores");
-const lienzo = document.getElementById("lienzo");
+	let colorSeleccionado = "white";
+	let pintando = false;
 
-colores.addEventListener("click", (event) => {
-	colorSeleccionado = event.target.id;
-	console.log(colorSeleccionado);
-});
+	const colores = document.getElementById("colores");
+	const lienzo = document.getElementById("lienzo");
+	const borrar = document.getElementById("borrar");
 
-// Empezar a pintar al presionar el botón del ratón
-lienzo.addEventListener("mousedown", (event) => {
-	if (event.target.tagName === "TD") {
-		pintando = true;
-		event.target.style.backgroundColor = colorSeleccionado;
-	}
-});
+	colores.addEventListener("click", (event) => {
+		colorSeleccionado = event.target.id;
+		console.log(colorSeleccionado);
+	});
 
-// Pintar al mover el ratón con el botón presionado
-lienzo.addEventListener("mouseover", (event) => {
-	if (pintando && event.target.tagName === "TD") {
-		event.target.style.backgroundColor = colorSeleccionado;
-	}
-});
+	lienzo.addEventListener("mousedown", (event) => {
+		if (event.target.tagName === "TD") {
+			console.log(event);
+			pintando = true;
+			event.target.style.backgroundColor = colorSeleccionado;
+		}
+	});
+
+	lienzo.addEventListener("mouseover", (event) => {
+		if (pintando && event.target.tagName === "TD") {
+			event.target.style.backgroundColor = colorSeleccionado;
+		}
+	});
+
+	lienzo.addEventListener("mouseup", () => {
+		pintando = false;
+	});
+
+	lienzo.addEventListener("mouseleave", (event) => {
+		event.preventDefault;
+	});
+
+	borrar.addEventListener("click", (event) => {
+		borrarLienzo();
+	});
+}; // Fin windows.onload.
