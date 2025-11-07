@@ -1,0 +1,43 @@
+.piezas {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.pieza {
+	width: 33.33%;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.pieza img {
+	width: 100%;
+	height: auto;
+}
+
+.tablero {
+	border-collapse: collapse;
+}
+
+.tablero td {
+	width: 100px;
+	height: 100px;
+	border: 1px solid #000;
+}
+
+.tablero img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.reiniciar {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	width: fit-content;
+}
+.reiniciar:hover {
+	background-color: #0056b3;
+}
