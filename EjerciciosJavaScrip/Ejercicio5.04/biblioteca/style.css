@@ -1,70 +1,76 @@
+/*
+Generado por IA.
+Cuando aprenda CSS lo haré yo mismo, lo juro.
+*/
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	background-color: #f0f0f0;
 }
 
-.piezas, .tablero {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+.piezas,
+.tablero {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: #ffffff;
+	border: 2px solid #ccc;
+	border-radius: 8px;
 }
 
 .pieza {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #999;
-    border-radius: 4px;
-    background-color: #eaeaea;
-    cursor: grab;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #999;
+	border-radius: 4px;
+	background-color: #eaeaea;
+	cursor: grab;
 }
 
 .pieza img {
-    max-width: 100%;
-    max-height: 100%;
+	max-width: 120%;
+	max-height: 120%;
 }
 
 .tablero table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 .tablero td {
-    width: 100px;
-    height: 100px;
-    border: 1px #000 solid;
-    text-align: center;
-    vertical-align: middle;
-    background-color: #f9f9f9;
+	width: 100px;
+	height: 100px;
+	border: 1px #000 solid;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #f9f9f9;
 }
 
 .mensaje {
-    display: none;
-    text-align: center;
-    font-size: 1.2em;
-    color: green;
-    margin-bottom: 20px;
+	display: none;
+	text-align: center;
+	font-size: 1.2em;
+	color: green;
+	margin-bottom: 20px;
 }
 
 .reiniciar {
-    text-align: center;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: fit-content;
-    margin: 0 auto;
+	text-align: center;
+	background-color: #007bff;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: fit-content;
+	margin: 0 auto;
 }
 
 .reiniciar:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
 }
