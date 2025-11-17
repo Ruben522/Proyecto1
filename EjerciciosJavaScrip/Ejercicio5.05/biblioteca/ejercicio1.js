@@ -5,22 +5,65 @@ const validarNombre = (nombre) => {
 	return nombre.length >= 5;
 };
 
-// Valida que el grupo o intérprete tenga 5 caracteres o más.
-const validarGrupo = (nombre) => {};
+// Comprueba si hay algún caracter.
+const estaVacio = (caracteres) => {
+	return caracteres === "";
+};
 
 // Valida que el año tenga 4 dígitos.
-const validarAnio = (fecha) => {};
+const validarFecha = (fecha) => {
+	return fecha.length === 4 && sonNumeros(fecha);
+};
 
-// Valida si hay seleccionado algún género.
-const tieneGenero = () => {};
+// Comprueba que sean números.
+const sonNumeros = (numeros) => {
+	return !isNaN(numeros);
+};
+
+// Comprueba si hay seleccionado algún género (Array).
+const tieneGenero = (generos) => {
+	return generos.length !== 0;
+};
 
 // Valida según la expresión regular.
-const validarUbicación = (ubicacion) => {};
+const validarUbicacion = (ubicacion) => {
+	let expresion = /^ES-\d{3}[A-Z]{2}$/;
 
+	return expresion.test(ubicacion);
+};
+
+// Comprueba si hay errores.
+const tieneErrores = (errores) => {
+	return errores.length > 0;
+};
+
+// Elimina todo el contenido del div información que contiene los errores.
+const limpiarInformacion = (divInfo) => {
+	divInfo.innerHTML = "";
+	divInfo.style.display = "none";
+};
+
+// Muestra en el div información si ha habido errores.
+const mostrarInformacion = (divInfo, errores) => {
+	limpiarInformacion(divInfo);
+
+	if (tieneErrores(errores)) {
+		divInfo.style.display = "block";
+		divInfo.style.backgroundColor = "lightcoral";
+		divInfo.innerHTML = errores.join("<br>");
+	} else {
+		divInfo.style.display = "block";
+		divInfo.style.backgroundColor = "lightgreen";
+		divInfo.innerHTML = "✅ Todos los datos son correctos. ¡Guardado listo!";
+	}
+};
 export {
 	validarNombre,
-	validarGrupo,
-	validarAnio,
+	estaVacio,
+	sonNumeros,
+	validarFecha,
 	tieneGenero,
-	validarUbicación,
+	validarUbicacion,
+	tieneErrores,
+	mostrarInformacion,
 };
