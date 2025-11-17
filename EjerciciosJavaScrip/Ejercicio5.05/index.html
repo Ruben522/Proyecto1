@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ejercicio 1</title>
+		<link rel="stylesheet" href="biblioteca/style.css" />
+	</head>
+	<body>
+		<div class="formulario">
+			<form id="formu" name="formu">
+				<label for="nombre">Nombre del disco: </label>
+				<input
+					type="text"
+					id="nombre"
+					name="nombre"
+					placeholder="Nombre del disco..."
+				/>
+				<label for="url">Carátula: </label>
+				<input
+					type="url"
+					id="caratula"
+					name="caratula"
+					placeholder="url de la canción..."
+				/>
+				<label for="compositor">Grupo de música o intérprete: </label>
+				<input
+					type="text"
+					id="compositor"
+					name="compositor"
+					placeholder="Grupo o intérprete de la canción..."
+				/>
+				<label for="number">Año de publicación: </label>
+				<input
+					type="number"
+					id="number"
+					name="number"
+					placeholder="Año de publicación de la canción..."
+				/>
+				<div class="generos" id="generos">
+					Géneros de música a los que pertenece:
+					<label for="nombre">Rock</label>
+					<input type="checkbox" id="rock" name="rock" value="rock" />
+					<label for="nombre">Jazz</label>
+					<input type="checkbox" id="jazz" name="jazz" value="jazz" />
+					<label for="nombre">Funk</label>
+					<input type="checkbox" id="funk" name="funk" value="funk" />
+					<label for="nombre">Hip-hop</label>
+					<input type="checkbox" id="hip-hop" name="hip-hop" value="hip-hop" />
+					<label for="nombre">House</label>
+					<input type="checkbox" id="house" name="house" value="house" />
+				</div>
+				<label for="localizacion">Localización: </label>
+				<input
+					type="text"
+					id="localizacion"
+					name="localizacion"
+					value=""
+					placeholder="¿Dónde está guardado?"
+				/>
+				<label for="prestado">¿Lo hemos prestado?</label>
+				<input type="checkbox" id="prestado" name="prestado" value="prestado" />
+
+				<input type="button" id="guardar" value="Guardar" />
+				<input type="button" id="mostrar" value="Mostrar" />
+			</form>
+		</div>
+		<script type="module" src="main.js"></script>
+	</body>
+</html>
