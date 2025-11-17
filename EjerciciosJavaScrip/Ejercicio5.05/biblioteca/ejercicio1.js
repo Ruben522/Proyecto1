@@ -43,19 +43,23 @@ const limpiarInformacion = (divInfo) => {
 	divInfo.style.display = "none";
 };
 
-// Muestra en el div información si ha habido errores.
-const mostrarInformacion = (divInfo, errores) => {
-	limpiarInformacion(divInfo);
+const mostrarInformacion = (divInfo, mensaje) => {
+	divInfo.style.display = "block";
+	divInfo.innerHTML = mensaje;
+};
 
-	if (tieneErrores(errores)) {
-		divInfo.style.display = "block";
-		divInfo.style.backgroundColor = "lightcoral";
-		divInfo.innerHTML = errores.join("<br>");
-	} else {
-		divInfo.style.display = "block";
-		divInfo.style.backgroundColor = "lightgreen";
-		divInfo.innerHTML = "✅ Todos los datos son correctos. ¡Guardado listo!";
-	}
+const guardarEnJSON = (formulario, discos) => {
+	const disco = [
+		{
+			nombre: formulario.nombre.value,
+			compositor: formulario.compositor.value,
+			fecha: formulario.number.value,
+			localizacion: formulario.localizacion.value,
+			generos: Array.from(formulario.generos),
+			prestado: formulario.prestado.checked,
+		},
+	];
+	return [...discos, disco];
 };
 export {
 	validarNombre,
@@ -66,4 +70,6 @@ export {
 	validarUbicacion,
 	tieneErrores,
 	mostrarInformacion,
+	limpiarInformacion,
+	guardarEnJSON,
 };

@@ -1,7 +1,7 @@
 "use strict";
 
 import {
-    validarNombre,
+	validarNombre,
 	estaVacio,
 	sonNumeros,
 	validarFecha,
@@ -9,37 +9,52 @@ import {
 	validarUbicacion,
 	tieneErrores,
 	mostrarInformacion,
+	limpiarInformacion,
+	guardarEnJSON,
 } from "./biblioteca/ejercicio1.js";
 
 const formulario = document.getElementById("formu");
 const informacion = document.getElementById("informacion");
-const btnGuardar = document.getElementById("guardar");
+const guardar = document.getElementById("guardar");
 
-btnGuardar.addEventListener("click", () => {
-    let errores = [];
+guardar.addEventListener("click", () => {
+	let errores = [];
+	let discos = [];
 
-    const nombre = formulario.nombre.value;
-    const compositor = formulario.compositor.value;
-    const fecha = formulario.number.value;
-    const localizacion = formulario.localizacion.value;
-    const generos = Array.from(formulario.generos);
-    const generosSeleccionados = generos.filter(g => g.checked);
+	const nombre = formulario.nombre.value;
+	const compositor = formulario.compositor.value;
+	const fecha = formulario.number.value;
+	const localizacion = formulario.localizacion.value;
+	const generos = Array.from(formulario.generos);
+	const generosSeleccionados = generos.filter((g) => g.checked);
+	const prestado = formulario.prestado.checked;
+	limpiarInformacion(informacion);
 
-    if (estaVacio(nombre) || !validarNombre(nombre))
-        errores = [...errores, "El nombre debe tener al menos 5 caracteres."];
+	console.log(prestado);
+	if (estaVacio(nombre) || !validarNombre(nombre))
+		errores = [...errores, "El nombre debe tener al menos 5 caracteres."];
 
-    if (estaVacio(compositor) || !validarNombre(compositor))
-        errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
+	if (estaVacio(compositor) || !validarNombre(compositor))
+		errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
 
-    if (estaVacio(fecha) || !sonNumeros(fecha) || !validarFecha(fecha))
-        errores = [...errores, "El año debe tener exactamente 4 dígitos numéricos."];
+	if (estaVacio(fecha) || !sonNumeros(fecha) || !validarFecha(fecha))
+		errores = [
+			...errores,
+			"El año debe tener exactamente 4 dígitos numéricos.",
+		];
 
-    if (!tieneGenero(generosSeleccionados))
-        errores = [...errores, "Selecciona al menos un género musical."];
+	if (!tieneGenero(generosSeleccionados))
+		errores = [...errores, "Selecciona al menos un género musical."];
 
-    if (estaVacio(localizacion) || !validarUbicacion(localizacion))
-        errores = [...errores, "La localización debe tener el formato ES-001AA."];
+	if (estaVacio(localizacion) || !validarUbicacion(localizacion))
+		errores = [...errores, "La localización debe tener el formato ES-001AA."];
 
-    mostrarInformacion(informacion, errores);
-    
+	if (tieneErrores(errores)) {
+		mostrarInformacion(informacion, errores);
+	} else {
+		let mensaje = "Todo correcto";
+		mostrarInformacion(informacion, mensaje);
+		guardarEnJSON(formulario, discos);
+		console.log(discos.length);
+	}
 });
