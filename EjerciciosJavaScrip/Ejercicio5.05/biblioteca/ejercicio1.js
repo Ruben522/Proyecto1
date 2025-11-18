@@ -48,28 +48,73 @@ const mostrarInformacion = (divInfo, mensaje) => {
 	divInfo.innerHTML = mensaje;
 };
 
-const guardarEnJSON = (formulario, discos) => {
-	const disco = [
-		{
-			nombre: formulario.nombre.value,
-			compositor: formulario.compositor.value,
-			fecha: formulario.number.value,
-			localizacion: formulario.localizacion.value,
-			generos: Array.from(formulario.generos),
-			prestado: formulario.prestado.checked,
-		},
-	];
-	return [...discos, disco];
+const obtenerGenerosSeleccionados = () => {
+    const generos = document.getElementsByName("generos");
+    let seleccionados = [];
+
+    for (let i = 0; i < generos.length; i++) {
+        if (generos[i].checked === true) {
+            seleccionados = [...seleccionados, generos[i]];
+        }
+    }
+
+    return seleccionados;
+};
+
+const recogerDatosFormulario = (formulario) => {
+    return {
+        nombre: formulario.nombre.value,
+        compositor: formulario.compositor.value,
+        fecha: formulario.number.value,
+        localizacion: formulario.localizacion.value,
+        caratula: formulario.caratula.value,
+        prestado: formulario.prestado.checked,
+        generosSeleccionados: obtenerGenerosSeleccionados()
+    };
+};
+
+const validarFormulario = (datos) => {
+    let errores = [];
+
+    if (estaVacio(datos.nombre) || !validarNombre(datos.nombre))
+        errores = [...errores, "El nombre debe tener al menos 5 caracteres."];
+
+    if (estaVacio(datos.compositor) || !validarNombre(datos.compositor))
+        errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
+
+    if (estaVacio(datos.fecha) || !sonNumeros(datos.fecha) || !validarFecha(datos.fecha))
+        errores = [...errores, "El año debe tener exactamente 4 dígitos numéricos."];
+
+    if (!tieneGenero(datos.generosSeleccionados))
+        errores = [...errores, "Debes seleccionar al menos un género."];
+
+    if (estaVacio(datos.localizacion) || !validarUbicacion(datos.localizacion))
+        errores = [...errores, "La localización debe tener el formato ES-001AA."];
+
+    return errores;
+};
+
+const guardarDiscoJSON = (datosFormulario) => {
+	let generos = [];
+
+    for (let i = 0; i < datosFormulario.generosSeleccionados.length; i++) {
+        generos = [...generos, datosFormulario.generosSeleccionados[i].value];
+    }
+    return {
+        nombre: datosFormulario.nombre,
+        compositor: datosFormulario.compositor,
+        fecha: datosFormulario.fecha,
+        generos: generos,
+        localizacion: datosFormulario.localizacion,
+        prestado: datosFormulario.prestado,
+        caratula: datosFormulario.caratula
+    };
 };
 export {
-	validarNombre,
-	estaVacio,
-	sonNumeros,
-	validarFecha,
-	tieneGenero,
-	validarUbicacion,
-	tieneErrores,
-	mostrarInformacion,
-	limpiarInformacion,
-	guardarEnJSON,
+	recogerDatosFormulario,
+    validarFormulario,
+    guardarDiscoJSON,
+    tieneErrores,
+    limpiarInformacion,
+    mostrarInformacion
 };
