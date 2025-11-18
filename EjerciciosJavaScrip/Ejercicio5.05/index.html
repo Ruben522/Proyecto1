@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Ejercicio 1</title>
-		<link rel="stylesheet" href="biblioteca/style.css" />
+		<!--<link rel="stylesheet" href="biblioteca/style.css" />-->
 	</head>
 	<body>
 		<div class="formulario">
@@ -55,7 +55,6 @@
 					type="text"
 					id="localizacion"
 					name="localizacion"
-					value=""
 					placeholder="¿Dónde está guardado?"
 				/>
 				<label for="prestado">¿Lo hemos prestado?</label>
@@ -63,10 +62,23 @@
 
 				<input type="button" id="guardar" value="Guardar" />
 				<input type="button" id="mostrar" value="Mostrar" />
+
+				<label for="filtrar">Filtrar por nombre: </label>
+				<input
+					type="text"
+					id="nombrefiltrar"
+					name="nombrefiltrar"
+					placeholder="F-1 Trillion..."
+				/>
+				<input type="button" id="filtrar" value="Filtrar" />
+				<input type="button" id="limpiar" value="Limpiar" />
 			</form>
 		</div>
 
 		<div id="informacion" class="informacion"></div>
+		<div id="lista" class="lista"></div>
+		<div id="filtrado" class="filtrado"></div>
+
 		<script type="module" src="main.js"></script>
 	</body>
 </html>

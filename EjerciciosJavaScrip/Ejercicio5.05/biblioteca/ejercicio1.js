@@ -43,78 +43,132 @@ const limpiarInformacion = (divInfo) => {
 	divInfo.style.display = "none";
 };
 
-const mostrarInformacion = (divInfo, mensaje) => {
+const mostrarErrores = (divInfo, errores) => {
+	divInfo.style.display = "block";
+	divInfo.innerHTML = errores;
+};
+
+const mostrarTodoCorrecto = (divInfo) => {
+	let mensaje = "Todo correcto";
 	divInfo.style.display = "block";
 	divInfo.innerHTML = mensaje;
 };
 
-const obtenerGenerosSeleccionados = () => {
-    const generos = document.getElementsByName("generos");
-    let seleccionados = [];
+const obtenerGenerosSeleccionados = (formulario) => {
+	const generos = formulario.generos;
+	let seleccionados = [];
 
-    for (let i = 0; i < generos.length; i++) {
-        if (generos[i].checked === true) {
-            seleccionados = [...seleccionados, generos[i]];
-        }
-    }
+	for (let i = 0; i < generos.length; i++) {
+		if (generos[i].checked === true) {
+			seleccionados = [...seleccionados, generos[i]];
+		}
+	}
 
-    return seleccionados;
+	return seleccionados;
+};
+
+const recogerNombreFiltrar = (formulario) => {
+	return formulario.nombrefiltrar.value;
 };
 
 const recogerDatosFormulario = (formulario) => {
-    return {
-        nombre: formulario.nombre.value,
-        compositor: formulario.compositor.value,
-        fecha: formulario.number.value,
-        localizacion: formulario.localizacion.value,
-        caratula: formulario.caratula.value,
-        prestado: formulario.prestado.checked,
-        generosSeleccionados: obtenerGenerosSeleccionados()
-    };
+	return {
+		nombre: formulario.nombre.value,
+		compositor: formulario.compositor.value,
+		fecha: formulario.number.value,
+		localizacion: formulario.localizacion.value,
+		caratula: formulario.caratula.value,
+		prestado: formulario.prestado.checked,
+		generosSeleccionados: obtenerGenerosSeleccionados(formulario),
+	};
 };
 
 const validarFormulario = (datos) => {
-    let errores = [];
+	let errores = [];
 
-    if (estaVacio(datos.nombre) || !validarNombre(datos.nombre))
-        errores = [...errores, "El nombre debe tener al menos 5 caracteres."];
+	if (estaVacio(datos.nombre) || !validarNombre(datos.nombre))
+		errores = [...errores, "El nombre debe tener al menos 5 caracteres."];
 
-    if (estaVacio(datos.compositor) || !validarNombre(datos.compositor))
-        errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
+	if (estaVacio(datos.compositor) || !validarNombre(datos.compositor))
+		errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
 
-    if (estaVacio(datos.fecha) || !sonNumeros(datos.fecha) || !validarFecha(datos.fecha))
-        errores = [...errores, "El año debe tener exactamente 4 dígitos numéricos."];
+	if (
+		estaVacio(datos.fecha) ||
+		!sonNumeros(datos.fecha) ||
+		!validarFecha(datos.fecha)
+	)
+		errores = [...errores, "El año debe tener 4 dígitos."];
 
-    if (!tieneGenero(datos.generosSeleccionados))
-        errores = [...errores, "Debes seleccionar al menos un género."];
+	if (!tieneGenero(datos.generosSeleccionados))
+		errores = [...errores, "Debes seleccionar al menos un género."];
 
-    if (estaVacio(datos.localizacion) || !validarUbicacion(datos.localizacion))
-        errores = [...errores, "La localización debe tener el formato ES-001AA."];
+	if (estaVacio(datos.localizacion) || !validarUbicacion(datos.localizacion))
+		errores = [...errores, "La localización debe tener el formato ES-001AA."];
 
-    return errores;
+	return errores;
 };
 
 const guardarDiscoJSON = (datosFormulario) => {
 	let generos = [];
 
-    for (let i = 0; i < datosFormulario.generosSeleccionados.length; i++) {
-        generos = [...generos, datosFormulario.generosSeleccionados[i].value];
-    }
-    return {
-        nombre: datosFormulario.nombre,
-        compositor: datosFormulario.compositor,
-        fecha: datosFormulario.fecha,
-        generos: generos,
-        localizacion: datosFormulario.localizacion,
-        prestado: datosFormulario.prestado,
-        caratula: datosFormulario.caratula
-    };
+	for (let i = 0; i < datosFormulario.generosSeleccionados.length; i++) {
+		generos = [...generos, datosFormulario.generosSeleccionados[i].value];
+	}
+	return {
+		nombre: datosFormulario.nombre,
+		compositor: datosFormulario.compositor,
+		fecha: datosFormulario.fecha,
+		generos: generos,
+		localizacion: datosFormulario.localizacion,
+		prestado: datosFormulario.prestado,
+		caratula: datosFormulario.caratula,
+	};
 };
+const estructuraDisco = (disco) => {
+	return `
+        <div class="disco">
+            <h3>${disco.nombre}</h3>
+            <p><strong>Compositor:</strong> ${disco.compositor}</p>
+            <p><strong>Año:</strong> ${disco.anio}</p>
+            <p><strong>Géneros:</strong> ${disco.generos.join(", ")}</p>
+            <p><strong>Localización:</strong> ${disco.localizacion}</p>
+            <p><strong>Prestado:</strong> ${disco.prestado ? "Sí" : "No"}</p>
+            <img src="${disco.caratula}" />
+        </div>
+    `;
+};
+
+// Muestra todos los discos
+const mostrarDiscos = (arrayDiscos, divMostrar) => {
+	let contenido = "";
+	for (let i = 0; i < arrayDiscos.length; i++) {
+		let disco = arrayDiscos[i];
+		contenido += estructuraDisco(disco);
+	}
+	divMostrar.innerHTML = contenido;
+};
+
+// Filtra mediante el nombre que nos pasa el usuario.
+const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
+	let contenido = "";
+	for (let i = 0; i < arrayDiscos.length; i++) {
+		let disco = arrayDiscos[i];
+		if (disco.nombre === nombre) {
+			contenido += estructuraDisco(disco);
+		}
+	}
+	divFiltrado.innerHTML = contenido;
+};
+
 export {
 	recogerDatosFormulario,
-    validarFormulario,
-    guardarDiscoJSON,
-    tieneErrores,
-    limpiarInformacion,
-    mostrarInformacion
+	validarFormulario,
+	guardarDiscoJSON,
+	tieneErrores,
+	limpiarInformacion,
+	mostrarErrores,
+	mostrarDiscos,
+	mostrarTodoCorrecto,
+	filtrarDisco,
+	recogerNombreFiltrar,
 };

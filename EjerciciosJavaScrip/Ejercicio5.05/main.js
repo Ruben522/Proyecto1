@@ -1,36 +1,49 @@
 "use strict";
 
-"use strict";
-
 import {
-    recogerDatosFormulario,
-    validarFormulario,
-    guardarDiscoJSON,
-    tieneErrores,
-    limpiarInformacion,
-    mostrarInformacion
+	recogerDatosFormulario,
+	validarFormulario,
+	guardarDiscoJSON,
+	tieneErrores,
+	limpiarInformacion,
+	mostrarErrores,
+	mostrarTodoCorrecto,
+	mostrarDiscos,
+	filtrarDisco,
+	recogerNombreFiltrar,
 } from "./biblioteca/ejercicio1.js";
 
 const formulario = document.getElementById("formu");
 const informacion = document.getElementById("informacion");
 const btnGuardar = document.getElementById("guardar");
+const btnMostrar = document.getElementById("mostrar");
+const mostrar = document.getElementById("lista");
+const btnFiltrar = document.getElementById("filtrar");
+const filtrado = document.getElementById("filtrado");
 
-btnGuardar.addEventListener("click",
-	(evento) => {
-    const datos = recogerDatosFormulario(formulario);
-    let errores = validarFormulario(datos);
+let discos = [];
 
-    limpiarInformacion(informacion);
+btnGuardar.addEventListener("click", (evento) => {
+	const datos = recogerDatosFormulario(formulario);
+	let errores = validarFormulario(datos);
 
-    if (!tieneErrores(errores)) {
-		let mensaje = "Todo correcto";
-        let discoJSON = guardarDiscoJSON(datos);
-        console.log("Guardado como JSON:", discoJSON);
-		mostrarInformacion(informacion, mensaje);
+	limpiarInformacion(informacion);
 
-    } else {
-		mostrarInformacion(informacion, errores);
+	if (!tieneErrores(errores)) {
+		let discoJSON = guardarDiscoJSON(datos);
+		discos = [...discos, discoJSON];
+		console.log(discos);
+		mostrarTodoCorrecto(informacion);
+	} else {
+		mostrarErrores(informacion, errores);
 	}
 });
 
+btnMostrar.addEventListener("click", (evento) => {
+	mostrarDiscos(discos, mostrar);
+});
 
+btnFiltrar.addEventListener("click", () => {
+	let nombre = recogerNombreFiltrar(formulario);
+	filtrarDisco(nombre, discos, filtrado);
+});
