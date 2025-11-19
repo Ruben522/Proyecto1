@@ -3,7 +3,7 @@
 import {
 	recogerDatosFormulario,
 	validarFormulario,
-	guardarDiscoJSON,
+	crearObjetoDisco,
 	tieneErrores,
 	limpiarInformacion,
 	mostrarErrores,
@@ -28,17 +28,15 @@ window.onload = () => {
 	if (typeof Storage !== "undefined") {
 		let discos = cargarLocalStorage();
 
-		btnGuardar.addEventListener("click", (evento) => {
+		btnGuardar.addEventListener("click", () => {
 			const datos = recogerDatosFormulario(formulario);
 			let errores = validarFormulario(datos);
 
 			limpiarInformacion(informacion);
 
 			if (!tieneErrores(errores)) {
-				let discoJSON = guardarDiscoJSON(datos);
-				console.log("Valor de 'discos' (antes de guardar):", discos);
-				console.log("Tipo de 'discos' (antes de guardar):", typeof discos);
-				discos = [...discos, discoJSON];
+				let disco = crearObjetoDisco(datos);
+				discos = [...discos, disco];
 				guardarEnLocalStorage(discos);
 				mostrarTodoCorrecto(informacion);
 				limpiarFormulario(formulario);
@@ -69,6 +67,7 @@ window.onload = () => {
 				if (confirm("Quieres borrar este disco?")) {
 					if (confirm("¿Pero de verdad?")) {
 						discos = borrarDisco(discos, evento.target.id);
+						guardarEnLocalStorage(discos);
 						mostrarDiscos(discos, mostrar);
 					}
 				}

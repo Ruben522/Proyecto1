@@ -5,7 +5,7 @@ const validarNombre = (nombre) => {
 	return nombre.length >= 5;
 };
 
-// Comprueba si hay algún caracter.
+// Comprueba si hay algún carácter.
 const estaVacio = (caracteres) => {
 	return caracteres === "";
 };
@@ -20,12 +20,12 @@ const sonNumeros = (numeros) => {
 	return !isNaN(numeros);
 };
 
-// Comprueba si hay seleccionado algún género (Array).
+// Comprueba si se ha seleccionado algún género (Array).
 const tieneGenero = (generos) => {
 	return generos.length !== 0;
 };
 
-// Valida según la expresión regular.
+// Valida la ubicación usando una expresión regular.
 const validarUbicacion = (ubicacion) => {
 	let expresion = /^ES-\d{3}[A-Z]{2}$/;
 
@@ -42,21 +42,26 @@ const limpiarInformacion = (divInfo) => {
 	divInfo.innerHTML = "";
 };
 
+// Elimina los datos que escribió o marcó el usuario.
 const limpiarFormulario = (formulario) => {
 	formulario.reset();
 };
 
+// Muestra los errores en el div que entra por parámetro.
 const mostrarErrores = (divInfo, errores) => {
 	divInfo.style.display = "block";
 	divInfo.innerHTML = errores;
 };
 
+// Muestra un mensaje predeterminado en el div que entra por parámetro.
 const mostrarTodoCorrecto = (divInfo) => {
 	let mensaje = "Todo correcto";
 	divInfo.style.display = "block";
 	divInfo.innerHTML = mensaje;
 };
 
+// Obtiene los datos de los checkbox que han sido seleccionados
+// en el formulario que entra por parámetro.
 const obtenerGenerosSeleccionados = (formulario) => {
 	const generos = formulario.generos;
 	let seleccionados = [];
@@ -70,10 +75,12 @@ const obtenerGenerosSeleccionados = (formulario) => {
 	return seleccionados;
 };
 
+// Devuelve el valor del campo nombreFiltrar del formulario.
 const recogerNombreFiltrar = (formulario) => {
 	return formulario.nombrefiltrar.value;
 };
 
+// Devuelve los datos del formulario que entra por parámetro como un objeto.
 const recogerDatosFormulario = (formulario) => {
 	return {
 		nombre: formulario.nombre.value,
@@ -86,6 +93,8 @@ const recogerDatosFormulario = (formulario) => {
 	};
 };
 
+// Valida todos los campos del formulario y devuelve un array vacío
+// o un array de string de mensajes de error.
 const validarFormulario = (datos) => {
 	let errores = [];
 
@@ -95,11 +104,7 @@ const validarFormulario = (datos) => {
 	if (estaVacio(datos.compositor) || !validarNombre(datos.compositor))
 		errores = [...errores, "El compositor debe tener al menos 5 caracteres."];
 
-	if (
-		estaVacio(datos.fecha) ||
-		!sonNumeros(datos.fecha) ||
-		!validarFecha(datos.fecha)
-	)
+	if (estaVacio(datos.fecha) || !validarFecha(datos.fecha))
 		errores = [...errores, "El año debe tener 4 dígitos."];
 
 	if (!tieneGenero(datos.generosSeleccionados))
@@ -111,7 +116,8 @@ const validarFormulario = (datos) => {
 	return errores;
 };
 
-const guardarDiscoJSON = (datosFormulario) => {
+// Crea un objeto a partir de los datos del formulario que entra por parámetro.
+const crearObjetoDisco = (datosFormulario) => {
 	let generos = [];
 
 	for (let i = 0; i < datosFormulario.generosSeleccionados.length; i++) {
@@ -127,6 +133,8 @@ const guardarDiscoJSON = (datosFormulario) => {
 		caratula: datosFormulario.caratula,
 	};
 };
+
+// Devuelve la estructura de un disco con sus datos para mostrarlo en el DOM.
 const estructuraDisco = (disco) => {
 	return `
         <div class="disco">
@@ -142,7 +150,7 @@ const estructuraDisco = (disco) => {
     `;
 };
 
-// Muestra todos los discos
+// Muestra todos los discos.
 const mostrarDiscos = (arrayDiscos, divMostrar) => {
 	let contenido = "";
 	for (let i = 0; i < arrayDiscos.length; i++) {
@@ -152,7 +160,7 @@ const mostrarDiscos = (arrayDiscos, divMostrar) => {
 	divMostrar.innerHTML = contenido;
 };
 
-// Filtra mediante el nombre que nos pasa el usuario.
+// Filtra mediante el nombre que nos pasa el usuario por parámetro.
 const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
 	let contenido = "";
 	for (let i = 0; i < arrayDiscos.length; i++) {
@@ -164,36 +172,38 @@ const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
 	divFiltrado.innerHTML = contenido;
 };
 
+// Devuelve un array con todos los discos excepto el que coincide
+// con el nombre recibido por parámetro.
 const borrarDisco = (arrayDiscos, nombreDisco) => {
 	return arrayDiscos.filter((disco) => disco.nombre !== nombreDisco);
 };
 
+// Valida si hay algún disco guardado.
 const discosVacios = (discosJSON) => {
 	return discosJSON === null;
 };
 
+// Guarda los discos en el localStorage.
 const guardarEnLocalStorage = (arrayDiscos) => {
 	const discosJSON = JSON.stringify(arrayDiscos);
 	localStorage.setItem("discos", discosJSON);
 };
 
+// Carga los discos guardados en el localStorage.
 const cargarLocalStorage = () => {
 	const discosJSON = localStorage.getItem("discos");
 	if (discosVacios(discosJSON)) {
 		return [];
 	}
-	const data = JSON.parse(discosJSON);
-	if (Array.isArray(data)) {
-		return data;
-	}
-
-	return [];
+	const discos = JSON.parse(discosJSON);
+	
+	return discos;
 };
 
 export {
 	recogerDatosFormulario,
 	validarFormulario,
-	guardarDiscoJSON,
+	crearObjetoDisco,
 	tieneErrores,
 	limpiarInformacion,
 	mostrarErrores,
