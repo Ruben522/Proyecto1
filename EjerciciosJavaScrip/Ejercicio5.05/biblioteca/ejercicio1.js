@@ -136,8 +136,7 @@ const crearObjetoDisco = (datosFormulario) => {
 
 // Devuelve la estructura de un disco con sus datos para mostrarlo en el DOM.
 const estructuraDisco = (disco) => {
-	return `
-        <div class="disco">
+	return `<div class="disco">
 			<img class="borrar" src="./img/borrar.png" id="${disco.nombre}">
             <h3>${disco.nombre}</h3>
 			<img src="${disco.caratula}" />
@@ -146,8 +145,7 @@ const estructuraDisco = (disco) => {
             <p><strong>Géneros:</strong> ${disco.generos.join(", ")}</p>
             <p><strong>Localización:</strong> ${disco.localizacion}</p>
             <p><strong>Prestado:</strong> ${disco.prestado ? "Sí" : "No"}</p>
-        </div>
-    `;
+        </div>`;
 };
 
 // Muestra todos los discos.
