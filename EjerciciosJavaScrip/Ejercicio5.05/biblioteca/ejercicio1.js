@@ -40,7 +40,10 @@ const tieneErrores = (errores) => {
 // Elimina todo el contenido del div información que contiene los errores.
 const limpiarInformacion = (divInfo) => {
 	divInfo.innerHTML = "";
-	divInfo.style.display = "none";
+};
+
+const limpiarFormulario = (formulario) => {
+  formulario.reset();
 };
 
 const mostrarErrores = (divInfo, errores) => {
@@ -127,13 +130,14 @@ const guardarDiscoJSON = (datosFormulario) => {
 const estructuraDisco = (disco) => {
 	return `
         <div class="disco">
+			<img class="borrar" src="./img/borrar.png" id="${disco.nombre}">
             <h3>${disco.nombre}</h3>
+			<img src="${disco.caratula}" />
             <p><strong>Compositor:</strong> ${disco.compositor}</p>
-            <p><strong>Año:</strong> ${disco.anio}</p>
+            <p><strong>Año:</strong> ${disco.fecha}</p>
             <p><strong>Géneros:</strong> ${disco.generos.join(", ")}</p>
             <p><strong>Localización:</strong> ${disco.localizacion}</p>
             <p><strong>Prestado:</strong> ${disco.prestado ? "Sí" : "No"}</p>
-            <img src="${disco.caratula}" />
         </div>
     `;
 };
@@ -160,6 +164,27 @@ const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
 	divFiltrado.innerHTML = contenido;
 };
 
+const borrarDisco = (arrayDiscos, nombreDisco) => {
+  return arrayDiscos.filter((disco) => disco.nombre !== nombreDisco);
+};
+
+const guardarEnLocalStorage = (arrayDiscos) => {
+	const discosJSON = JSON.stringify(arrayDiscos);
+	localStorage.setItem("discos", discosJSON);
+};
+
+const cargarLocalStorage = () => {
+	const discosJSON = localStorage.getItem("discos");
+	if (discosVacios(discosJSON)) {
+		return []
+	}
+	
+	return JSON.parse(discosJSON);
+};
+
+const discosVacios = (discosJSON) => {
+	return discosJSON === null;
+}
 export {
 	recogerDatosFormulario,
 	validarFormulario,
@@ -171,4 +196,8 @@ export {
 	mostrarTodoCorrecto,
 	filtrarDisco,
 	recogerNombreFiltrar,
+	borrarDisco,
+	limpiarFormulario,
+	guardarEnLocalStorage,
+	cargarLocalStorage,
 };

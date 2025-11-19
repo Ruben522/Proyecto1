@@ -1,72 +1,83 @@
-/* Estilos generales del body */
 body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f9; /* Fondo claro */
-	display: flex;
-	justify-content: center; /* Centra horizontalmente */
-	align-items: center; /* Centra verticalmente (si es necesario) */
-	min-height: 100vh;
-	margin: 0;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
 }
 
-/* Estilos para el contenedor principal del formulario */
+/* Contenedor principal del formulario */
 .formulario {
-	background-color: #ffffff;
-	padding: 30px;
-	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 500px; /* Limita el ancho del formulario */
+    background: white;
+    padding: 20px;
+    max-width: 400px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
-/* Estilos para el formulario */
-#form {
-	display: grid;
-	/* Define 2 columnas para que la etiqueta y el input queden en línea */
-	grid-template-columns: 1fr 2fr;
-	gap: 15px; /* Espacio entre los elementos de la cuadrícula */
-	align-items: center; /* Alinea verticalmente los elementos */
+/* Inputs y labels */
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-/* Estilos para las etiquetas */
-label {
-	font-weight: bold;
-	text-align: right; /* Alinea el texto de la etiqueta a la derecha */
-	padding-right: 10px;
+form input[type="text"],
+form input[type="url"],
+form input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
-/* Estilos para los campos de texto, URL y fecha */
-input[type="text"],
-input[type="url"],
-input[type="date"] {
-	width: 90%; /* Ocupa casi todo el espacio de su columna */
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+/* Botones */
+form input[type="button"] {
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007acc;
+    color: white;
+    cursor: pointer;
 }
 
-/* Estilos específicos para la sección de Géneros */
-.generos {
-	/* Hace que la sección de géneros ocupe las dos columnas */
-	grid-column: 1 / 3;
-	padding: 10px;
-	border: 1px dashed #cccccc;
-	border-radius: 4px;
+form input[type="button"]:hover {
+    background-color: #005fa3;
 }
 
-.generos label,
-.generos input[type="checkbox"] {
-	font-weight: normal;
-	text-align: left;
-	margin-right: 15px;
-	/* Evitamos que los elementos de género usen la cuadrícula principal para su alineación */
-	display: inline-block;
+/* Div de información (errores / correcto) */
+#informacion {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    background: #eee;
+    border: 1px solid #ccc;
 }
 
-/* Estilos para la opción de 'prestado' (radio button) */
-input[type="checkbox"] {
-	/* Alinea el radio button a la izquierda de su celda */
-	justify-self: start;
-	margin-left: 0;
+/* Lista de discos */
+#lista,
+#filtrado {
+    background: white;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* Entradas de disco */
+.disco-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.disco-item:last-child {
+    border-bottom: none;
+}
+
+/* Resultado del filtrado */
+#filtrado {
+    background-color: #fafafa;
 }
