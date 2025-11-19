@@ -43,7 +43,7 @@ const limpiarInformacion = (divInfo) => {
 };
 
 const limpiarFormulario = (formulario) => {
-  formulario.reset();
+	formulario.reset();
 };
 
 const mostrarErrores = (divInfo, errores) => {
@@ -165,7 +165,11 @@ const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
 };
 
 const borrarDisco = (arrayDiscos, nombreDisco) => {
-  return arrayDiscos.filter((disco) => disco.nombre !== nombreDisco);
+	return arrayDiscos.filter((disco) => disco.nombre !== nombreDisco);
+};
+
+const discosVacios = (discosJSON) => {
+	return discosJSON === null;
 };
 
 const guardarEnLocalStorage = (arrayDiscos) => {
@@ -176,15 +180,16 @@ const guardarEnLocalStorage = (arrayDiscos) => {
 const cargarLocalStorage = () => {
 	const discosJSON = localStorage.getItem("discos");
 	if (discosVacios(discosJSON)) {
-		return []
+		return [];
 	}
-	
-	return JSON.parse(discosJSON);
+	const data = JSON.parse(discosJSON);
+	if (Array.isArray(data)) {
+		return data;
+	}
+
+	return [];
 };
 
-const discosVacios = (discosJSON) => {
-	return discosJSON === null;
-}
 export {
 	recogerDatosFormulario,
 	validarFormulario,
