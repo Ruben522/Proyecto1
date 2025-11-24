@@ -9,11 +9,17 @@ const Menu = () => {
 			<Link className="menu-link" to="/">
 				Inicio
 			</Link>
-			<Link className="menu-link" to="/insertar-disco">
-				Insertar Disco
+			<Link className="menu-link" to="/peliculas">
+				Peliculas
 			</Link>
-			<Link className="menu-link" to="/listar-discos">
-				Listar Discos
+			<Link className="menu-link" to="/galeria">
+				Galeria
+			</Link>
+			<Link className="menu-link" to="/interpretes">
+				Interpretes
+			</Link>
+			<Link className="menu-link" to="/acerca-de">
+				Acerca de
 			</Link>
 		</nav>
 	);
