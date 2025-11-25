@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const Errores = () => {
+// Componente para mostrar errores y mensajes.
+const Errores = ({ error, mensaje }) => {
   return (
-    <div>Errores</div>
-  )
-}
+      <>
+        {error}{mensaje}
+      </>
+  );
+};
 
-export default Errores
+export default Errores;

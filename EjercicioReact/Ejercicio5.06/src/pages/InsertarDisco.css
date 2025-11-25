@@ -1,0 +1,282 @@
+/* --- El Gemini Pro es bastante bueno para el css, mucho mejor que chatgpt --- */
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #6f9c8d; /* Fondo suave */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #22914e; /* Un verde oscuro para los títulos */
+    border-bottom: 2px solid #4da67b;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* --- Estilos del Formulario --- */
+
+.App-header {
+    background-color: #d1d1d1;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.formulario #formu {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+/* Ajuste de columnas para escritorio */
+@media (min-width: 768px) {
+    .formulario #formu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 30px;
+    }
+    /* Las etiquetas de filtrado y los botones de acción ocupan el ancho completo */
+    .formulario label[for="nombrefiltrar"],
+    .formulario input[type="button"] {
+        grid-column: span 1;
+    }
+    .formulario .generos {
+        grid-column: span 2;
+        padding-top: 10px;
+        border-top: 1px dashed #ccc;
+    }
+}
+
+.formulario label {
+    font-weight: 600;
+    color: #1a4d2e;
+    margin-bottom: 5px;
+    display: block;
+    align-self: center;
+}
+
+.formulario input[type="text"],
+.formulario input[type="url"],
+.formulario input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffa2a2;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.formulario input[type="text"]:focus,
+.formulario input[type="url"]:focus,
+.formulario input[type="number"]:focus {
+    border-color: #4da67b;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(77, 166, 123, 0.2);
+}
+
+/* Estilos de Checkboxes de Géneros */
+
+.generos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    font-weight: 600;
+    color: #1a4d2e;
+}
+
+.generos label {
+    font-weight: 400; /* Las etiquetas individuales son más ligeras */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.generos input[type="checkbox"] {
+    /* Ocultar el checkbox nativo y usar un estilo customizado */
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #4da67b;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.generos input[type="checkbox"]:checked {
+    background-color: #4da67b;
+    border-color: #1a4d2e;
+}
+/* Estilo para el checkmark (opcional) */
+.generos input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: rgb(189, 74, 74);
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Estilos de Botones */
+
+.formulario input[type="button"],
+.disco-item button,
+.controles-listado input[type="button"] {
+    background-color: #4da67b;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase;
+}
+
+.formulario input[type="button"]:hover,
+.disco-item button:hover,
+.controles-listado input[type="button"]:hover {
+    background-color: #1a4d2e;
+    transform: translateY(-1px);
+}
+
+/* Botón de limpiar o alternativo */
+.formulario input[value="Limpiar"],
+.disco-item button:nth-child(2) { /* Botón de Editar */
+    background-color: #f0ad4e;
+}
+
+.formulario input[value="Limpiar"]:hover,
+.disco-item button:nth-child(2):hover {
+    background-color: #d88e2a;
+}
+
+/* --- Mensajes y Errores --- */
+
+.informacion {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Estilo para el componente Errores.jsx */
+.error {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    color: #a94442;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* Estilo para el mensaje de éxito */
+.mensaje {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* --- Estilos del Listado de Discos --- */
+
+.listado-discos {
+    padding: 25px;
+    background-color: #e7e6e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.controles-listado {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.controles-listado input[type="text"] {
+    flex-grow: 1;
+}
+
+
+/* Grid para los elementos del listado */
+.listado-discos > div:not(:first-child) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.disco-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.disco-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.disco-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.disco-detalles {
+    flex-grow: 1;
+}
+
+.disco-detalles h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #1a4d2e;
+}
+
+.disco-detalles p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.disco-detalles button {
+    margin-top: 10px;
+    margin-right: 8px;
+    padding: 8px 12px;
+}
+
+.prestado-status {
+    cursor: pointer;
+    font-style: italic;
+    padding: 5px 0;
+}
+
+.prestado-status strong {
+    font-weight: 700;
+    color: #c44; /* Rojo para 'SÍ' */
+}
+
+.prestado-status strong[prestado="false"] {
+    color: #4da67b; /* Verde para 'NO' */
+}
