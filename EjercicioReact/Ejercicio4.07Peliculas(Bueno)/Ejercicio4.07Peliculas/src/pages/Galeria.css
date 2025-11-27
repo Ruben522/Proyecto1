@@ -1,0 +1,17 @@
+.galeria {
+ 	padding: 20px;
+ }
+ 
+ .galeria nav {
+ 	margin-bottom: 20px;
+ }
+ 
+ .galeria nav a {
+ 	margin-right: 15px;
+ 	text-decoration: none;
+ 	color: #007bff;
+ }
+ 
+ .galeria nav a:hover {
+ 	text-decoration: underline;
+ }
