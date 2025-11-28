@@ -1,22 +1,32 @@
-"use strict";
-
-import { traerDatos, mostrarPeliculas } from "./biblioteca/ejercicio1.js";
+import {
+	traerDatos,
+	mostrarPelicula,
+	mostrarNombrePeliculas,
+} from "./biblioteca/ejercicio1.js";
 
 window.onload = () => {
 	const url = "https://swapi.info/api/films";
 	const divPeliculas = document.getElementById("peliculas");
 	const divInformacion = document.getElementById("informacion");
-	let peliculas = "";
+	const divErrores = document.getElementById("errores");
+	let peliculas = [];
 
-	const traerDatos = async () => {
+	const obtenerYMostrarDatos = async () => {
 		try {
 			peliculas = await traerDatos(url);
 			console.log("todo correcto");
+			divPeliculas.innerHTML = mostrarNombrePeliculas(peliculas);
 		} catch (error) {
-			console.log(error.message);
+			divErrores.innerHTML = error.message;
 		}
 	};
-	traerDatos();
-	divPeliculas.innerHTML = mostrarPeliculas(peliculas);
-	divPeliculas.addEventListener;
-}; // Fin window.onload.
+	obtenerYMostrarDatos();
+
+	divPeliculas.addEventListener("click", (evento) => {
+		if (evento.target.classList.contains("pelicula-nombre")) {
+			const idPelicula = evento.target.id;
+			console.log(idPelicula);
+			divInformacion.innerHTML = mostrarPelicula(peliculas, idPelicula);
+		}
+	});
+};
