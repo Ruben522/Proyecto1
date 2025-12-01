@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #fbe54e;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-image: url("../imgs/fondo.jpeg"); 
+    background-size: cover; 
+    background-position: center center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat; 
+}
+
+.peliculas, .informacion {
+    background-color: rgba(30, 30, 30, 0.7); 
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(251, 229, 78, 0.1); 
+    backdrop-filter: blur(4px);
+}
+
+@media (min-width: 992px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+    }
+
+    .peliculas {
+        grid-column: 1 / 2;
+    }
+
+    .informacion {
+        grid-column: 2 / 3;
+    }
+}
+
+.peliculas {
+    padding: 0;
+}
+
+.pelicula-nombre {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    border-left: 5px solid transparent; 
+}
+
+.pelicula-nombre:hover {
+    background-color: rgba(51, 51, 51, 0.7); 
+    color: #fbe54e;
+    border-left: 5px solid #fbe54e;
+    transform: translateX(5px);
+}
+
+.pelicula-nombre strong {
+    color: #cccccc;
+}
+
+.pelicula-informacion p {
+    margin-bottom: 10px;
+    color: #cccccc;
+}
+
+.pelicula-informacion strong {
+    color: #fbe54e;
+    display: inline-block;
+    min-width: 90px;
+}
+
+.pelicula-informacion p:nth-child(2) {
+    font-style: italic;
+    color: #ffd700;
+    text-align: justify;
+    padding: 15px 0;
+    border-top: 1px dashed #333;
+    border-bottom: 1px dashed #333;
+    margin-top: 15px;
+}
+
+.errores {
+    color: #dc3545;
+    padding: 10px; 
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center; 
+}
