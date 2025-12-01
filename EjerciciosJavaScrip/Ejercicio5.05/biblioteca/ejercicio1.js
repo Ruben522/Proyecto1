@@ -26,7 +26,7 @@ const tieneGenero = (generos) => {
 };
 
 // Valida la ubicación usando una expresión regular.
-const validarUbicacion = (ubicacion) => {
+const validarUbicacion = (ubicacion) => { 
 	let expresion = /^ES-\d{3}[A-Z]{2}$/;
 
 	return expresion.test(ubicacion);
