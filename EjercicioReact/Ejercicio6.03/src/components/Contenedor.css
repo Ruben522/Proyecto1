@@ -1,0 +1,9 @@
+.contenedor {
+	border: 2px solid #00028b;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 15px;
+	background-color: #1f1f1f;
+	height: calc(100vh - 140px);
+	width: 1000px;
+}
