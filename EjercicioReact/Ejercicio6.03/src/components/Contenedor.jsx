@@ -2,7 +2,7 @@
 import React from "react";
 import "./Contenedor.css";
 
-//Este componente se usa como contenedor de los productos.
+//Este componente se usa como contenedor.
 const Contenedor = ({ children }) => {
 	return <div className="contenedor">{children}</div>;
 };

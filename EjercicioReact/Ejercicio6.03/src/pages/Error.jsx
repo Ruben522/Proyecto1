@@ -2,13 +2,13 @@ import React from "react";
 import "./Error.css";
 import { useNavigate } from "react-router-dom";
 
-// Componente que maneja los errores de página no encontrada.
-const Error = () => {
+// Componente que maneja los errores de la página.
+const Error = ({error}) => {
 	const navigate = useNavigate();
 	return (
 		<div className="mensaje-error">
-			<h1>Error 404</h1>
-			<p>Ha pasado algo.</p>
+			<h1>Error</h1>
+			<p>{error}</p>
 			<button onClick={() => navigate("/")}>Inicio</button>
 		</div>
 	);
