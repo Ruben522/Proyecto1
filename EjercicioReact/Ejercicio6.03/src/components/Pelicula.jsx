@@ -3,9 +3,11 @@ import Protagonista from "./Protagonista";
 import Error from "../pages/Error";
 import "./Pelicula.css";
 
+// Transforma una fecha a formato castellano.
 const transformarFechaCastellano = (fecha) =>
     fecha.toLocaleDateString("es-ES");
 
+// Componente que muestra la información de una película y sus protagonistas.
 const Pelicula = ({
     episode_id,
     title,
@@ -21,10 +23,12 @@ const Pelicula = ({
 	
 	const cargarProtagonistas = async () => {
         try {
-            const urls = characters.slice(0, 10);
+            // Anteiormente usaba un blucle for, pero me parecía que había algún método para coger
+            // solo 10 y chatgpt me sugirió este método con slice.
+            const protagonistas = characters.slice(0, 10);
 
-            const promesas = urls.map(async (url) => {
-                const respuesta = await fetch(url);
+            const promesas = protagonistas.map(async (protagonista) => {
+                const respuesta = await fetch(protagonista);
                 const datos = await respuesta.json();
                 return datos;
             });

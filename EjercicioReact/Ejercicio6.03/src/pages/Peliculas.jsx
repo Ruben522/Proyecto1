@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { traerDatos } from "../library/TraerDatos";
 import Pelicula from "../components/Pelicula";
 
+// Componente que muestra la lista de películas y el detalle de la película seleccionada.
 const Peliculas = () => {
 	const [peliculas, setPeliculas] = useState([]);
 	const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
@@ -28,6 +29,7 @@ const Peliculas = () => {
 		<div className="peliculas-page-container">
 			<div className="lista-peliculas">
 			<h1>Películas</h1>
+			{peliculas.length === 0 && <p>Cargando películas...</p>}
 			{peliculas.map((peli) => (
 				<p
 					key={peli.episode_id}
