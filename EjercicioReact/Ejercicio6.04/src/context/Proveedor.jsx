@@ -6,7 +6,6 @@ const ContextoPeliculas = createContext();
 const Proveedor = ({ children }) => {
 	const [peliculas, setPeliculas] = useState([]);
 	const [protagonistas, setProtagonistas] = useState([]);
-
 	const [error, setError] = useState(null);
 
 	const url = "https://swapi.info/api/films";
@@ -24,10 +23,14 @@ const Proveedor = ({ children }) => {
 		cargarPeliculas();
 	}, []);
 
+	const traerProtagonistas = (pelicula) => {
+		const protagonistas = peliculas.map((pelicula) => pelicula.characters);
+	};
+
 	const cargarProtagonistas = async () => {
 		try {
-			// Anteiormente usaba un blucle for, pero me parecía que había algún método para coger
-			// solo 10 y chatgpt me sugirió este método con slice.
+			const characters = traerProtagonistas(peliculas);
+
 			const protagonistas = characters.slice(0, 10);
 
 			const promesas = protagonistas.map(async (protagonista) => {

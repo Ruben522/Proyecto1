@@ -3,7 +3,7 @@ import "./Error.css";
 import { useNavigate } from "react-router-dom";
 
 // Componente que maneja los errores de la página.
-const Error = ({error}) => {
+const Error = ({ error }) => {
 	const navigate = useNavigate();
 	return (
 		<div className="mensaje-error">

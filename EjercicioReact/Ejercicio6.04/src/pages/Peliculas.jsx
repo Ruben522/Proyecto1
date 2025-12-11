@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { traerDatos } from "../library/TraerDatos";
 import Pelicula from "../components/Pelicula";
 import { ContextoPeliculas } from "../context/Proveedor.jsx";
 
