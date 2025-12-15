@@ -6,7 +6,6 @@ const ContextoPeliculas = createContext();
 const Proveedor = ({ children }) => {
 	const [peliculas, setPeliculas] = useState([]);
 	const [protagonistas, setProtagonistas] = useState([]);
-
 	const [error, setError] = useState(null);
 
 	const url = "https://swapi.info/api/films";

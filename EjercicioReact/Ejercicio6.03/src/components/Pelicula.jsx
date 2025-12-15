@@ -8,15 +8,17 @@ const transformarFechaCastellano = (fecha) =>
     fecha.toLocaleDateString("es-ES");
 
 // Componente que muestra la información de una película y sus protagonistas.
-const Pelicula = ({
-    episode_id,
-    title,
-    opening_crawl,
-    director,
-    producer,
-    release_date,
-    characters
-}) => {
+const Pelicula = ({ pelicula }) => {
+    const {
+        episode_id,
+        title,
+        director,
+        opening_crawl,
+        producer,
+        release_date,
+        characters,
+    } = pelicula;
+
     const [protagonistas, setProtagonistas] = useState([]);
     const [protagonistaSeleccionado, setProtagonistaSeleccionado] = useState(null);
 	const [error, setError] = useState(null);

@@ -42,15 +42,7 @@ const Peliculas = () => {
 			</div>
 			<div className="detalle-seccion">
 			{peliculaSeleccionada && (
-				<Pelicula
-					episode_id={peliculaSeleccionada.episode_id}
-					title={peliculaSeleccionada.title}
-					director={peliculaSeleccionada.director}
-					opening_crawl={peliculaSeleccionada.opening_crawl}
-					producer={peliculaSeleccionada.producer}
-					release_date={peliculaSeleccionada.release_date}
-					characters={peliculaSeleccionada.characters}
-				/>
+				<Pelicula pelicula =  {peliculaSeleccionada}/>
 			)}
 			</div>
 		</div>
