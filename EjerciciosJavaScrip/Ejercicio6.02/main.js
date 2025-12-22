@@ -1,8 +1,4 @@
-import {
-	traerDatos,
-	mostrarPelicula,
-	mostrarNombrePeliculas,
-} from "./biblioteca/ejercicio1.js";
+import {traerDatos, pintarPeliculas } from "./biblioteca/biblioteca.js";
 
 window.onload = () => {
 	const url = "https://swapi.info/api/films";
@@ -15,7 +11,7 @@ window.onload = () => {
 		try {
 			peliculas = await traerDatos(url);
 			console.log("todo correcto");
-			divPeliculas.innerHTML = mostrarNombrePeliculas(peliculas);
+			divPeliculas.innerHTML = pintarPeliculas(peliculas);
 		} catch (error) {
 			divErrores.innerHTML = error.message;
 		}
@@ -30,3 +26,4 @@ window.onload = () => {
 		}
 	});
 };
+

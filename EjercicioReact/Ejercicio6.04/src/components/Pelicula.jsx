@@ -20,7 +20,7 @@ const Pelicula = ({
 	const [protagonistaSeleccionado, setProtagonistaSeleccionado] =
 		useState(null);
 
-	const { protagonista } = useContext(ContextoPeliculas);
+	const { protagonistas } = useContext(ContextoPeliculas);
 	const seleccionarProtagonista = (protagonista) => {
 		if (
 			!protagonistaSeleccionado ||
@@ -58,14 +58,18 @@ const Pelicula = ({
 			</p>
 
 			<h3>Protagonistas</h3>
+			{console.log(protagonistas)}
+
 			<ul className="lista-protagonistas">
-				{protagonistas.map((protagonista) => (
+				{protagonistas.map((characters) => (
 					<li
-						key={protagonista.name}
+						key={characters.name}
 						className="protagonista-nombre"
-						onClick={() => seleccionarProtagonista(protagonista)}
+						onClick={() => seleccionarProtagonista(characters)}
 					>
-						{protagonista.name}
+						{console.log(protagonistas)}
+						{console.log(characters)}
+						{characters.name}
 					</li>
 				))}
 			</ul>

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { traerDatos } from "../library/TraerDatos";
 import Pelicula from "../components/Pelicula";
 import { ContextoPeliculas } from "../context/Proveedor.jsx";
 
@@ -7,13 +6,12 @@ import { ContextoPeliculas } from "../context/Proveedor.jsx";
 const Peliculas = () => {
 	const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
 
-	const { peliculas } = useContext(ContextoPeliculas);
+	const { peliculas, protagonistas } = useContext(ContextoPeliculas);
 
 	return (
 		<div className="peliculas-page-container">
 			<div className="lista-peliculas">
 				<h1>Películas</h1>
-				{console.log({ peliculas })}
 				{peliculas.length === 0 && <p>Cargando películas...</p>}
 				{peliculas.map((peli) => (
 					<p

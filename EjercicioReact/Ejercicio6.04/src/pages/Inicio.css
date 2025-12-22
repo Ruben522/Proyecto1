@@ -1,25 +1,25 @@
 .inicio {
-    background-color: rgba(30, 30, 30, 0.7); 
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
-    min-height: 50vh;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 15px rgba(251, 229, 78, 0.1); 
-    backdrop-filter: blur(4px);
+	background-color: rgba(30, 30, 30, 0.7);
+	border-radius: 10px;
+	padding: 40px;
+	text-align: center;
+	min-height: 50vh;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 0 15px rgba(251, 229, 78, 0.1);
+	backdrop-filter: blur(4px);
 }
 
 .inicio h2 {
-    color: #ffd700;
-    font-size: 2.5em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5); 
+	color: #ffd700;
+	font-size: 2.5em;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
 }
 /* Estilo del párrafo descriptivo */
 .inicio p {
-    font-size: 1.2em;
-    margin-top: 20px;
-    color: #fbe54e;
+	font-size: 1.2em;
+	margin-top: 20px;
+	color: #fbe54e;
 }

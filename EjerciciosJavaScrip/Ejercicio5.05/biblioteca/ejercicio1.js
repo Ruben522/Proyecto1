@@ -68,7 +68,7 @@ const obtenerGenerosSeleccionados = (formulario) => {
 
 	for (let i = 0; i < generos.length; i++) {
 		if (generos[i].checked === true) {
-			seleccionados = [...seleccionados, generos[i]];
+			seleccionados = [...seleccionados, generos[i].value];
 		}
 	}
 
@@ -79,6 +79,7 @@ const obtenerGenerosSeleccionados = (formulario) => {
 const recogerNombreFiltrar = (formulario) => {
 	return formulario.nombrefiltrar.value;
 };
+
 
 // Devuelve los datos del formulario que entra por parámetro como un objeto.
 const recogerDatosFormulario = (formulario) => {
@@ -92,7 +93,7 @@ const recogerDatosFormulario = (formulario) => {
 		generosSeleccionados: obtenerGenerosSeleccionados(formulario),
 	};
 };
-
+ 
 // Valida todos los campos del formulario y devuelve un array vacío
 // o un array de string de mensajes de error.
 const validarFormulario = (datos) => {
@@ -118,16 +119,12 @@ const validarFormulario = (datos) => {
 
 // Crea un objeto a partir de los datos del formulario que entra por parámetro.
 const crearObjetoDisco = (datosFormulario) => {
-	let generos = [];
 
-	for (let i = 0; i < datosFormulario.generosSeleccionados.length; i++) {
-		generos = [...generos, datosFormulario.generosSeleccionados[i].value];
-	}
 	return {
 		nombre: datosFormulario.nombre,
 		compositor: datosFormulario.compositor,
 		fecha: datosFormulario.fecha,
-		generos: generos,
+		generos: datosFormulario.generosSeleccionados,
 		localizacion: datosFormulario.localizacion,
 		prestado: datosFormulario.prestado,
 		caratula: datosFormulario.caratula,
@@ -142,7 +139,7 @@ const estructuraDisco = (disco) => {
 			<img src="${disco.caratula}" />
             <p><strong>Compositor:</strong> ${disco.compositor}</p>
             <p><strong>Año:</strong> ${disco.fecha}</p>
-            <p><strong>Géneros:</strong> ${disco.generos.join(", ")}</p>
+            <p><strong>Géneros:</strong> ${disco.generos}</p>
             <p><strong>Localización:</strong> ${disco.localizacion}</p>
             <p><strong>Prestado:</strong> ${disco.prestado ? "Sí" : "No"}</p>
         </div>`;
@@ -157,7 +154,7 @@ const mostrarDiscos = (arrayDiscos, divMostrar) => {
 	}
 	divMostrar.innerHTML = contenido;
 };
-
+ 
 // Filtra mediante el nombre que nos pasa el usuario por parámetro.
 const filtrarDisco = (nombre, arrayDiscos, divFiltrado) => {
 	let contenido = "";

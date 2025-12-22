@@ -14,7 +14,7 @@ import {
 	borrarDisco,
 	limpiarFormulario,
 	guardarEnLocalStorage,
-	cargarLocalStorage,
+	cargarLocalStorage, 
 } from "./biblioteca/ejercicio1.js";
 window.onload = () => {
 	const formulario = document.getElementById("formu");

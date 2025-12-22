@@ -8,7 +8,7 @@ const Proveedor = ({ children }) => {
 	const [protagonistas, setProtagonistas] = useState([]);
 	const [error, setError] = useState(null);
 
-	const url = "https://swapi.info/api/films";
+	const url = "https://swapi.dev/api/films";
 
 	const cargarPeliculas = async () => {
 		try {
@@ -23,10 +23,17 @@ const Proveedor = ({ children }) => {
 		cargarPeliculas();
 	}, []);
 
+	// Esto debe ser una función asincrona. Siempre es undefind porque se carga antes
+	// que las películas.
+	const traerProtagonistas = (peliculas) => {
+		const protagonistas = peliculas.map((pelicula) => pelicula.characters);
+		return protagonistas;
+	};
+
 	const cargarProtagonistas = async () => {
 		try {
-			// Anteiormente usaba un blucle for, pero me parecía que había algún método para coger
-			// solo 10 y chatgpt me sugirió este método con slice.
+			const characters = traerProtagonistas(peliculas);
+
 			const protagonistas = characters.slice(0, 10);
 
 			const promesas = protagonistas.map(async (protagonista) => {
@@ -45,9 +52,9 @@ const Proveedor = ({ children }) => {
 	// Carga los protagonistas cuando el componente se monta,
 	// no antes porque me estaba volviendo loco, siempre estaba vacío.
 	useEffect(() => {
-		if (!characters || characters.length === 0) return;
+		if (!protagonistas || protagonistas.length === 0) return;
 		cargarProtagonistas();
-	}, [characters]);
+	}, [protagonistas]);
 
 	const exportar = { peliculas, protagonistas };
 
