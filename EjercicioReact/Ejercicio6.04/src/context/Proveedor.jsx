@@ -1,14 +1,17 @@
 import React, { useState, useEffect, createContext } from "react";
-import { traerDatos } from "../library/TraerDatos.js";
+import { traerDatos, fetchJSON } from "../library/TraerDatos.js";
 
 const ContextoPeliculas = createContext();
 
 const Proveedor = ({ children }) => {
 	const [peliculas, setPeliculas] = useState([]);
 	const [protagonistas, setProtagonistas] = useState([]);
+	const [vehiculos, setVehiculos] = useState([]);
+	const [peliculaSeleccionada, setPeliculaSeleccionada] = useState([]);
+
 	const [error, setError] = useState(null);
 
-	const url = "https://swapi.dev/api/films";
+	const url = "https://swapi.py4e.com/api/films/";
 
 	const cargarPeliculas = async () => {
 		try {
@@ -23,40 +26,42 @@ const Proveedor = ({ children }) => {
 		cargarPeliculas();
 	}, []);
 
-	// Esto debe ser una función asincrona. Siempre es undefind porque se carga antes
-	// que las películas.
-	const traerProtagonistas = (peliculas) => {
-		const protagonistas = peliculas.map((pelicula) => pelicula.characters);
-		return protagonistas;
+	const traerVehiculos = async (urls) => {
+		const promesas = urls.map((url) => fetchJSON(url));
+		const resultados = await Promise.allSettled(promesas);
+		return resultados
+			.filter((p) => p.status === "fulfilled")
+			.map((p) => p.value);
 	};
 
-	const cargarProtagonistas = async () => {
+	const traerProtagonistas = async (urls) => {
+		const diezPrimeros = urls.slice(0, 10);
+		const promesas = diezPrimeros.map((url) => traerDatos(url));
+		const resultados = await Promise.allSettled(promesas);
+		return resultados
+			.filter((p) => p.status === "fulfilled")
+			.map((p) => p.value);
+	};
+
+	const cargarProtagonistas = async (urls) => {
 		try {
-			const characters = traerProtagonistas(peliculas);
-
-			const protagonistas = characters.slice(0, 10);
-
-			const promesas = protagonistas.map(async (protagonista) => {
-				const respuesta = await fetch(protagonista);
-				const datos = await respuesta.json();
-				return datos;
-			});
-			const resultados = await Promise.all(promesas);
-
-			setProtagonistas(resultados);
-		} catch (error) {
-			setError("Hubo un problema al cargar los protagonistas.");
+			const datosActores = await traerProtagonistas(urls);
+			setProtagonistas(datosActores);
+		} catch (err) {
+			setError(`Error al cargar protagonistas: ${err.message}`);
 		}
 	};
 
-	// Carga los protagonistas cuando el componente se monta,
-	// no antes porque me estaba volviendo loco, siempre estaba vacío.
-	useEffect(() => {
-		if (!protagonistas || protagonistas.length === 0) return;
-		cargarProtagonistas();
-	}, [protagonistas]);
+	const cargarVehiculos = async (urls) => {
+		try {
+			const datosVehiculos = await traerVehiculos(urls);
+			setVehiculos(datosVehiculos);
+		} catch (err) {
+			setError(`Error al cargar vehículos: ${err.message}`);
+		}
+	};
 
-	const exportar = { peliculas, protagonistas };
+	const exportar = { peliculas, protagonistas, vehiculos, cargarProtagonistas, cargarVehiculos, error };
 
 	return <ContextoPeliculas value={exportar}>{children}</ContextoPeliculas>;
 };

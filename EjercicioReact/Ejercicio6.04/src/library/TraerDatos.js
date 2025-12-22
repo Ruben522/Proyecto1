@@ -1,52 +1,30 @@
 // Función para consumir promesas generalista.
-const traerDatos = (url) => {
-	// Obtiene datos de una API y los transforma a JSON.
-	return (
-		fetch(url)
-			.then((respuesta) => {
-				return respuesta.json();
-			})
-			.then((datos) => {
-				if (datos.results) {
-					return datos.results;
-				} else {
-					return datos;
-				}
-			})
-			// Si se produce un error se devuelve un mensaje.
-			// Sólo afecta a errores de red.
-			.catch((error) => {
-				return `Se ha producido un error: ${error.message}`;
-			})
-	);
-};
+const traerDatos = async (url) => {
+    try {
+        const respuesta = await fetch(url)
+        if (!respuesta.ok) {
+            throw new Error(`Ha habido un error: ${respuesta.status} - ${respuesta.statusText}`);
+            
+        }
+        const datos = await respuesta.json();
 
-// Versión de traer datos con gestión de errores correcta
-// y utilizando async/await: más fácil de leer, mantener y depurar.
-const traerDatosBien = async (url) => {
-	try {
-		// Obtiene datos de una API.
-		const respuesta = await fetch(url);
-		// Se comprueba la respuesta: si ha ido mal.
-		if (!respuesta.ok) {
-			// Se lanza un error.
-			throw new Error(
-				`Error en traerDatosBien: ${respuesta.status} - ${respuesta.statusText}`
-			);
-		}
-		// Si todo ha ido bien: se devuelven los datos.
-		const datos = await respuesta.json();
-		// Particularidad de la API.
-		if (datos.results) {
+        if (datos.results) {
 			return datos.results;
 		} else {
 			return datos;
 		}
-	} catch (error) {
-		// Se propaga el error para manejarlo en el componente externo.
-		// De esta forma se puede parametrizar.
-		throw error;
-	}
+
+    } catch (error) {
+        throw error
+    }
+}
+
+const fetchJSON = async (url) => {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) {
+        throw new Error(`Error en ${url}`);
+    }
+    return await respuesta.json();
 };
 
-export { traerDatos, traerDatosBien };
+export { traerDatos, fetchJSON };

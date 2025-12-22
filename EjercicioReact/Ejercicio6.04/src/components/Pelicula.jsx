@@ -17,10 +17,10 @@ const Pelicula = ({
 	release_date,
 	characters,
 }) => {
-	const [protagonistaSeleccionado, setProtagonistaSeleccionado] =
-		useState(null);
+	const [protagonistaSeleccionado, setProtagonistaSeleccionado] = useState(null);
 
-	const { protagonistas } = useContext(ContextoPeliculas);
+	const { protagonistas, cargarProtagonistas, error } = useContext(ContextoPeliculas);
+
 	const seleccionarProtagonista = (protagonista) => {
 		if (
 			!protagonistaSeleccionado ||
@@ -32,60 +32,61 @@ const Pelicula = ({
 		}
 	};
 
-	//if (error) return <Error error={error} />;
+	useEffect(() => {
+		if (characters && characters.length > 0) {
+			cargarProtagonistas(characters);
+		}
+		setProtagonistaSeleccionado(null);
+	}, [characters]);
 
 	return (
-		<div className="pelicula-informacion" id={episode_id}>
-			<p>
-				<strong>Nombre: </strong>
-				{title}
-			</p>
-			<p>
-				<strong>Sinopsis: </strong>
-				{opening_crawl}
-			</p>
-			<p>
-				<strong>Director: </strong>
-				{director}
-			</p>
-			<p>
-				<strong>Productor: </strong>
-				{producer}
-			</p>
-			<p>
-				<strong>Fecha: </strong>
-				{transformarFechaCastellano(new Date(release_date))}
-			</p>
+		<>
+			{error && <Error mensaje={error} />}
+			<div className="pelicula-informacion" id={episode_id}>
+				<p>
+					<strong>Nombre: </strong>
+					{title}
+				</p>
+				<p>
+					<strong>Sinopsis: </strong>
+					{opening_crawl}
+				</p>
+				<p>
+					<strong>Director: </strong>
+					{director}
+				</p>
+				<p>
+					<strong>Productor: </strong>
+					{producer}
+				</p>
+				<p>
+					<strong>Fecha: </strong>
+					{transformarFechaCastellano(new Date(release_date))}
+				</p>
 
-			<h3>Protagonistas</h3>
-			{console.log(protagonistas)}
+				<h3>Protagonistas</h3>
+				<ul className="lista-protagonistas">
+					{protagonistas.map((characters) => (
+						<li
+							key={characters.name}
+							className="protagonista-nombre"
+							onClick={() => seleccionarProtagonista(characters)}
+						>
+							{characters.name}
+						</li>
+					))}
+				</ul>
 
-			<ul className="lista-protagonistas">
-				{protagonistas.map((characters) => (
-					<li
-						key={characters.name}
-						className="protagonista-nombre"
-						onClick={() => seleccionarProtagonista(characters)}
-					>
-						{console.log(protagonistas)}
-						{console.log(characters)}
-						{characters.name}
-					</li>
-				))}
-			</ul>
-
-			{protagonistaSeleccionado && (
-				<Protagonista
-					name={protagonistaSeleccionado.name}
-					gender={protagonistaSeleccionado.gender}
-					height={protagonistaSeleccionado.height}
-					mass={protagonistaSeleccionado.mass}
-					hair_color={protagonistaSeleccionado.hair_color}
-					eye_color={protagonistaSeleccionado.eye_color}
-				/>
-			)}
-		</div>
-	);
+				{/* Me comentaste el uso de objeto para no pasar una lista interminable de parámetros, usé esa opción
+                al principio, pero le pregunté a la IA si había más formas de hacerlo, me recomendó esta
+                y me parece muy cómoda de usar. */}
+				{protagonistaSeleccionado && (
+					<Protagonista {...protagonistaSeleccionado}
+					/>
+				)}
+			</div>
+		</>
+	)
 };
 
 export default Pelicula;
