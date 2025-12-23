@@ -7,12 +7,7 @@ const traerDatos = async (url) => {
             
         }
         const datos = await respuesta.json();
-
-        if (datos.results) {
-			return datos.results;
-		} else {
-			return datos;
-		}
+		return datos;
 
     } catch (error) {
         throw error

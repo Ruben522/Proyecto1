@@ -1,0 +1,14 @@
+.contenedor {
+    background-image: url("../imgs/fondo.jpeg");
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #00028b;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px;
+    background-color: #1f1f1f;
+    width: auto; 
+    max-width: 1200px;
+    margin: 15px auto;
+    min-height: 80vh;
+}

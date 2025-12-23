@@ -19,7 +19,7 @@ const Peliculas = () => {
 						className="pelicula-nombre"
 						onClick={() => setPeliculaSeleccionada(peli)}
 					>
-					{peli.title}
+						<strong>Nombre: </strong> {peli.title}
 					</p>
 				))}
 			</div>

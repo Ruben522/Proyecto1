@@ -23,19 +23,3 @@
 	margin-top: 20px;
 	color: #fbe54e;
 }
-.inicio-content {
-    perspective: 400px;
-    overflow: hidden;
-}
-
-.inicio-content p {
-    animation: crawl 30s linear infinite;
-    transform: rotateX(20deg) translateY(100%);
-    text-align: justify;
-}
-
-@keyframes crawl {
-    0% { transform: rotateX(20deg) translateY(100%); opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: rotateX(25deg) translateY(-150%); opacity: 0; }
-}
