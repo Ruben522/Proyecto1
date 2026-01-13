@@ -1,0 +1,34 @@
+{
+  "discos": [
+    {
+      "id": "1",
+      "nombre": "Random Access Memories",
+      "caratula": "https://example.com/ram.jpg",
+      "compositor": "Daft Punk",
+      "fecha": 2013,
+      "localizacion": "ES-001AA",
+      "prestado": false,
+      "generos": ["funk", "house"]
+    },
+    {
+      "id": "2",
+      "nombre": "Kind of Blue",
+      "caratula": "https://example.com/kindofblue.jpg",
+      "compositor": "Miles Davis",
+      "fecha": 1959,
+      "localizacion": "ES-001BA",
+      "prestado": true,
+      "generos": ["jazz"]
+    },
+    {
+      "id": "3",
+      "nombre": "The Dark Side of the Moon",
+      "caratula": "https://example.com/darkside.jpg",
+      "compositor": "Pink Floyd",
+      "fecha": 1973,
+      "localizacion": "ES-002AA",
+      "prestado": false,
+      "generos": ["rock"]
+    }
+  ]
+}

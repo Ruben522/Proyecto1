@@ -1,82 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Errores from "../components/Errores.jsx";
 import Validar from "../components/Validar.jsx";
 import "./InsertarDisco.css";
+import { ContextoDiscos } from "../context/Proveedor.jsx";
 
 // Componente del formulario para insertar un disco.
 const FormularioDisco = () => {
-    const valoresIniciales = {
-        nombre: "",
-        caratula: "",
-        compositor: "",
-        fecha: "",
-        localizacion: "",
-        prestado: "",
-        generos: [],
-    };
-
-    const [disco, setDisco] = useState(valoresIniciales);
-    const [mensaje, setMensaje] = useState("");
-    const [error, setError] = useState("");
-
-    const actualizarDato = (evento) => {
-        const { name, value } = evento.target;
-        setDisco((prevDisco) => ({ ...prevDisco, [name]: value }));
-    };
-
-    const actualizarPrestadoCheck = (evento) => {
-        const { name, value } = evento.target;
-        setDisco((prevDisco) => {
-            const nuevoValor = prevDisco[name] === "" ? value : "";
-            return { ...prevDisco, [name]: nuevoValor };
-        });
-    };
-
-    const actualizarGenerosCheck = (evento) => {
-        const { value, checked } = evento.target;
-
-        setDisco((seleccionado) => {
-            let nuevosGeneros;
-            if (checked) {
-                nuevosGeneros = [...seleccionado.generos, value];
-            } else {
-                nuevosGeneros = seleccionado.generos.filter((g) => g !== value);
-            }
-            return { ...seleccionado, generos: nuevosGeneros };
-        });
-    };
-
-
-    const guardarDisco = () => {
-        setError("");
-        setMensaje("");
-
-        const errores = Validar(disco);
-
-        if (errores.length > 0) {
-            setError(errores.join(" "));
-            return;
-        }
-
-        let discos = JSON.parse(localStorage.getItem("discos")) || [];
-
-        const nuevoDisco = {
-            nombre: disco.nombre,
-            compositor: disco.compositor,
-            fecha: disco.fecha,
-            generos: disco.generos,
-            localizacion: disco.localizacion,
-            caratula: disco.caratula,
-            prestado: disco.prestado === "sí",
-        };
-
-        discos = [...discos, nuevoDisco];
-        localStorage.setItem("discos", JSON.stringify(discos));
-
-        setMensaje("Todo correcto. Disco guardado.");
-        setDisco(valoresIniciales);
-    };
+    
+    const { disco, actualizarDato, guardarDisco } = useContext(ContextoDiscos);
 
     return (
         <>

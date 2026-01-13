@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext } from "react";
-import { traerDatos } from "../library/TraerDatos.js";
+import { traerDatos } from "./data/TraerDatos.js";
 
 const ContextoPeliculas = createContext();
-
+ 
 const Proveedor = ({ children }) => {
 	const [peliculas, setPeliculas] = useState([]);
 	const [protagonistas, setProtagonistas] = useState([]);
