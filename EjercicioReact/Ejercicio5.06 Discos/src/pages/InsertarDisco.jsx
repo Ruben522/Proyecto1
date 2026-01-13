@@ -1,0 +1,191 @@
+import React from "react";
+import { useState } from "react";
+import Errores from "../components/Errores.jsx";
+import Validar from "../components/Validar.jsx";
+import "./InsertarDisco.css";
+
+// Componente del formulario para insertar un disco.
+const FormularioDisco = () => {
+    const valoresIniciales = {
+        nombre: "",
+        caratula: "",
+        compositor: "",
+        fecha: "",
+        localizacion: "",
+        prestado: "",
+        generos: [],
+    };
+
+    const [disco, setDisco] = useState(valoresIniciales);
+    const [mensaje, setMensaje] = useState("");
+    const [error, setError] = useState("");
+
+    const actualizarDato = (evento) => {
+        const { name, value } = evento.target;
+        setDisco((prevDisco) => ({ ...prevDisco, [name]: value }));
+    };
+
+    const actualizarPrestadoCheck = (evento) => {
+        const { name, value } = evento.target;
+        setDisco((prevDisco) => {
+            const nuevoValor = prevDisco[name] === "" ? value : "";
+            return { ...prevDisco, [name]: nuevoValor };
+        });
+    };
+
+    const actualizarGenerosCheck = (evento) => {
+        const { value, checked } = evento.target;
+
+        setDisco((seleccionado) => {
+            let nuevosGeneros;
+            if (checked) {
+                nuevosGeneros = [...seleccionado.generos, value];
+            } else {
+                nuevosGeneros = seleccionado.generos.filter((g) => g !== value);
+            }
+            return { ...seleccionado, generos: nuevosGeneros };
+        });
+    };
+
+
+    const guardarDisco = () => {
+        setError("");
+        setMensaje("");
+
+        const errores = Validar(disco);
+
+        if (errores.length > 0) {
+            setError(errores.join(" "));
+            return;
+        }
+
+        let discos = JSON.parse(localStorage.getItem("discos")) || [];
+
+        const nuevoDisco = {
+            nombre: disco.nombre,
+            compositor: disco.compositor,
+            fecha: disco.fecha,
+            generos: disco.generos,
+            localizacion: disco.localizacion,
+            caratula: disco.caratula,
+            prestado: disco.prestado === "sí",
+        };
+
+        discos = [...discos, nuevoDisco];
+        localStorage.setItem("discos", JSON.stringify(discos));
+
+        setMensaje("Todo correcto. Disco guardado.");
+        setDisco(valoresIniciales);
+    };
+
+    return (
+        <>
+            <div className="App-header">
+                <h2>Formulario de Discos</h2>
+                <div className="formulario">
+                    <form id="formu" name="formu">
+                        <label htmlFor="nombre">Nombre del disco: </label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre del disco..." value={disco.nombre || ""}
+                            onChange={(evento) => {
+                                actualizarDato(evento);
+                            }}
+                        />
+                        <label htmlFor="caratula">Carátula: </label>
+                        <input type="url" id="caratula" name="caratula" placeholder="url de la carátula..." value={disco.caratula || ""}
+                            onChange={(evento) => {
+                                actualizarDato(evento);
+                            }}
+                        />
+                        <label htmlFor="compositor">Grupo de música o intérprete: </label>
+                        <input type="text" id="compositor" name="compositor" placeholder="Grupo o intérprete de la canción..." value={disco.compositor || ""}
+                            onChange={(evento) => {
+                                actualizarDato(evento);
+                            }}
+                        />
+                        <label htmlFor="fecha">Año de publicación: </label>
+                        <input type="number" id="fecha" name="fecha" placeholder="Año de publicación de la canción..." value={disco.fecha || ""}
+                            onChange={(evento) => {
+                                actualizarDato(evento);
+                            }}
+                        />
+                        <div className="generos" id="generos">
+                            Géneros de música a los que pertenece:
+                            <label htmlFor="rock">Rock</label>
+                            <input type="checkbox" id="rock" name="generos" value="rock" checked={disco.generos.includes("rock")}
+                                onChange={(evento) => {
+                                    actualizarGenerosCheck(evento);
+                                }}
+                            />
+
+                            <label htmlFor="jazz">Jazz</label>
+                            <input type="checkbox" id="jazz" name="generos" value="jazz" checked={disco.generos.includes("jazz")}
+                                onChange={(evento) => {
+                                    actualizarGenerosCheck(evento);
+                                }}
+                            />
+                            <label htmlFor="funk">Funk</label>
+                            <input type="checkbox" id="funk" name="generos" value="funk" checked={disco.generos.includes("funk")}
+                                onChange={(evento) => {
+                                    actualizarGenerosCheck(evento);
+                                }}
+                            />
+
+                            <label htmlFor="hip-hop">Hip-hop</label>
+                            <input type="checkbox" id="hip-hop" name="generos" value="hip-hop" checked={disco.generos.includes("hip-hop")}
+                                onChange={(evento) => {
+                                    actualizarGenerosCheck(evento);
+                                }}
+                            />
+
+                            <label htmlFor="house">House</label>
+                            <input type="checkbox" id="house" name="generos" value="house" checked={disco.generos.includes("house")}
+                                onChange={(evento) => {
+                                    actualizarGenerosCheck(evento);
+                                }}
+                            />
+                        </div>
+                        <label htmlFor="localizacion">Localización: </label>
+                        <input type="text" id="localizacion" name="localizacion" placeholder="¿Dónde está guardado?" value={disco.localizacion || ""}
+                            onChange={(evento) => {
+                                actualizarDato(evento);
+                            }}
+                        />
+
+                        <label htmlFor="prestado">¿Lo hemos prestado?</label>
+                        <input
+                            type="checkbox"
+                            id="prestado"
+                            name="prestado"
+                            value="sí"
+                            checked={disco.prestado === "sí"}
+                            onChange={(evento) => {
+                                actualizarPrestadoCheck(evento);
+                            }}
+                        />
+
+                        <input type="button" id="guardar" value="Guardar"
+                            onClick={(evento) => {
+                                evento.preventDefault();
+                                guardarDisco();
+                            }}
+                        />
+
+                        <input type="button" id="limpiar" value="Limpiar"
+                            onClick={() => {
+                                setDisco(valoresIniciales);
+                                setMensaje("");
+                                setError("");
+                            }}
+                        />
+                    </form>
+                </div>
+                <div id="informacion" className="informacion">
+                    <Errores error={error} mensaje={mensaje} />
+                </div>
+                <br />
+            </div>
+        </>
+    );
+};
+
+export default FormularioDisco;
