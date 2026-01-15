@@ -1,0 +1,13 @@
+.info-extra {
+  display: none;
+}
+
+.disco.activo .info-extra {
+  display: block;
+}
+.disco {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}

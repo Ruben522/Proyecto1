@@ -9,14 +9,14 @@ const Menu = () => {
 			<Link className="menu-link" to="/">
 				Inicio
 			</Link>
-			{/*
+
 			<Link className="menu-link" to="/insertar-disco">
 				Insertar Disco
 			</Link>
+
 			<Link className="menu-link" to="/listar-discos">
 				Listar Discos
 			</Link>
-			*/}
 		</nav>
 	);
 };
