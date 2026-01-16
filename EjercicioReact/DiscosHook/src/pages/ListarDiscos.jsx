@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ListarDiscos.css";
-import useDiscos from "../hooks/useDiscos.js";
+import useDiscos from "../hooks/useDiscos";
 
 // Componente para listar, filtrar y borrar discos.
 const ListarDiscos = () => {
@@ -11,14 +11,9 @@ const ListarDiscos = () => {
 
 	const { disco } = useDiscos();
 
-	useEffect(() => {
-		const almacenados = disco;
-		setDiscosOriginal(almacenados);
-	}, []);
-
 	// Cada vez que se borre un disco, actualizamos la lista.
 	useEffect(() => {
-		setDiscosMostrar(discosOriginal);
+		setDiscosMostrar(disco);
 	}, [discosOriginal]);
 
 	const filtrar = () => {

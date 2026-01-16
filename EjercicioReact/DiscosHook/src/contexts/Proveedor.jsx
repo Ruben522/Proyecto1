@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
 import useAPI from "../hooks/useAPI.js";
-import { use } from "react";
 
 const ContextoDiscos = createContext();
 
@@ -35,9 +34,13 @@ const Proveedor = ({ children }) => {
 		obtenerDiscos();
 	}, []);
 
-	const exportar = { disco };
+	const exportar = { disco, setDisco };
 
-	return <ContextoDiscos value={exportar}>{children}</ContextoDiscos>;
+	return (
+		<ContextoDiscos.Provider value={exportar}>
+			{children}
+		</ContextoDiscos.Provider>
+	);
 };
 
 export default Proveedor;

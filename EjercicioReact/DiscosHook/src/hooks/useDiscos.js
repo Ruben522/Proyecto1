@@ -10,7 +10,7 @@ const useDiscos = () => {
 
 	if (!contexto) {
 		throw new Error(
-			"El hook useDiscos debe ser utilizado dentro de <ProveedorDiscos>."
+			`El hook useDiscos debe ser utilizado dentro de <Proveedor>.`
 		);
 	}
 
