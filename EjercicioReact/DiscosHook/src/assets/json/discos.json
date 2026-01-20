@@ -1,34 +1,41 @@
 {
   "discos": [
     {
-      "id": "1",
-      "nombre": "Random Access Memories",
-      "caratula": "https://example.com/ram.jpg",
-      "compositor": "Daft Punk",
-      "fecha": 2013,
+      "id": "5cd9",
+      "nombre": "rubeb",
+      "caratula": "http://localhost:5173/insertar-disco",
+      "compositor": "jojosw",
+      "fecha": "2022",
       "localizacion": "ES-001AA",
-      "prestado": false,
-      "generos": ["funk", "house"]
+      "prestado": "sí",
+      "generos": [
+        "jazz"
+      ]
     },
     {
-      "id": "2",
-      "nombre": "Kind of Blue",
-      "caratula": "https://example.com/kindofblue.jpg",
-      "compositor": "Miles Davis",
-      "fecha": 1959,
-      "localizacion": "ES-001BA",
-      "prestado": true,
-      "generos": ["jazz"]
+      "id": "7gh12",
+      "nombre": "Disco Editado",
+      "caratula": "http://localhost:5173/insertar-disco",
+      "compositor": "Compositor Editado",
+      "fecha": "2023",
+      "localizacion": "ES-002BB",
+      "prestado": "no",
+      "generos": [
+        "rock",
+        "pop"
+      ]
     },
     {
-      "id": "3",
-      "nombre": "The Dark Side of the Moon",
-      "caratula": "https://example.com/darkside.jpg",
-      "compositor": "Pink Floyd",
-      "fecha": 1973,
-      "localizacion": "ES-002AA",
-      "prestado": false,
-      "generos": ["rock"]
+      "id": "e354",
+      "nombre": "awdddddd",
+      "caratula": "http://localhost:5173/insertar-disco",
+      "compositor": "dbzhola",
+      "fecha": "1986",
+      "localizacion": "ES-001AA",
+      "prestado": "",
+      "generos": [
+        "jazz"
+      ]
     }
   ]
 }

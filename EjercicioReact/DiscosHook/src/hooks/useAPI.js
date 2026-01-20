@@ -34,7 +34,6 @@ export const useAPI = () => {
             throw error;
             
         } finally {
-            // 7 -> Al terminar la comunicación (correcta o no) se quita el estado cargando.
             setCargando(false);
         }
     };
@@ -58,7 +57,7 @@ export const useAPI = () => {
             body: JSON.stringify(body),
         });
     // Función para PATCH.
-    const editarPATCH = (url, body) =>
+    const editarCampo = (url, body) =>
         solicitud(url, {
             method: "PATCH",
             body: JSON.stringify(body),
@@ -76,7 +75,7 @@ export const useAPI = () => {
         obtener,
         guardar,
         editarPUT,
-        editarPATCH,
+        editarCampo,
         borrar,
     };
 };
