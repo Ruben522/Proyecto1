@@ -1,0 +1,30 @@
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 3px solid #0d2f46;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: rgb(95, 160, 198);
+}
+
+.cabecera img {
+    height: 50px;
+}
+
+.cabecera h1 {
+    flex-grow: 1;
+    margin-left: 20px;
+    font-size: 1.5rem;
+    color: #0a141b;
+}
+
+.cabecera a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+}

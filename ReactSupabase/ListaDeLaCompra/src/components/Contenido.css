@@ -1,0 +1,10 @@
+.contenido {
+    border: 3px solid #e67e22;
+    padding: 20px;
+    margin: 10px;
+    background-color: #54a786;
+    min-height: 80vh;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}

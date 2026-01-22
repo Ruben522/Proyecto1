@@ -1,0 +1,31 @@
+.producto {
+    border: 2px solid #9b59b6;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.producto:hover {
+    transform: translateX(5px);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f4ecf7;
+}
+
+.producto h2 {
+    font-size: 1rem;
+    margin: 0;
+    color: #333;
+}
+
+.producto p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}

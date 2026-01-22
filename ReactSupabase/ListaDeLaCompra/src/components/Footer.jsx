@@ -5,7 +5,7 @@ import "./Footer.css"
 const Footer = () => {
   return (
     <div className='pie-pagina'>
-        <p>Aplicación hecha por Rubén García, espero que sea de su agrado.</p>
+      <p>Gracias por visitar esta web.</p>
     </div>
   )
 }
