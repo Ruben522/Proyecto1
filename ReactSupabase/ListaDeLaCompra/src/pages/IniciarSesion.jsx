@@ -1,4 +1,5 @@
 import React from 'react'
+import "./Formulario.css"
 
 // Página para iniciar sesión. Se requiere correo y contraseña.
 // (AMPLIACIÓN) Si no hay usuario, se informará.
