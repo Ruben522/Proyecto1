@@ -14,7 +14,21 @@ const validarContraseña = (caracteres) => {
     return caracteres.length >= 8;
 };
 
-export const validar = (datos) => {
+const validarSesion = (datos) => {
+    let errores = [];
+    if (estaVacio(datos.email))
+        errores = [...errores, "El email es obligatorio."];
+
+    if (!validarContraseña(datos.password))
+        errores = [
+            ...errores,
+            "La contraseña debe tener al menos 8 caracteres.",
+        ];
+
+    return errores;
+};
+
+const validar = (datos) => {
     let errores = [];
 
     if (estaVacio(datos.name) || !validarNombre(datos.name))
@@ -26,12 +40,6 @@ export const validar = (datos) => {
     if (estaVacio(datos.email))
         errores = [...errores, "El email es obligatorio."];
 
-    if (estaVacio(datos.password))
-        errores = [
-            ...errores,
-            "La contraseña es obligatoria.",
-        ];
-
     if (!validarContraseña(datos.password))
         errores = [
             ...errores,
@@ -41,4 +49,4 @@ export const validar = (datos) => {
     return errores;
 };
 
-export default validar;
+export { validar, validarSesion };

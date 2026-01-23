@@ -1,38 +1,60 @@
 import React from 'react'
 import "./Formulario.css"
+import useSupabase from "../hooks/useSupabase.js";
+import Errores from "../pages/Errores.jsx";
 
 // Página para iniciar sesión. Se requiere correo y contraseña.
-// (AMPLIACIÓN) Si no hay usuario, se informará.
 const IniciarSesion = () => {
+
+  const {
+    actualizarDato,
+    enviarFormularioSesion,
+    limpiarFormulario,
+    mensaje,
+    error,
+    datosSesion,
+  } = useSupabase();
+
   return (
     <div className='formulario'>
       <h1>Iniciar Sesion</h1>
-      <form id="formulario" name="formulario">
+      <form id="formulario">
         <label htmlFor="email">Correo Electrónico</label>
-        <input type="email"
+        <input
+          type="email"
           id="email"
-          className='email'
+          name="email"
           placeholder="ejemplo@gmail.com"
-          onChange={(evento) => {
-            ActualizarDato(evento);
-          }} />
+          value={datosSesion.email}
+          onChange={(evento) => actualizarDato(evento)}
+        />
 
         <label htmlFor="password">Contraseña</label>
-        <input type="password"
-          id='password'
-          className='password'
-          placeholder="Contraseña"
-          onChange={() => {
-            ActualizarDato(evento);
-          }} />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Mínimo 8 caracteres"
+          value={datosSesion.password}
+          onChange={(evento) => actualizarDato(evento)}
+        />
 
-        <input type="button"
+        <input
+          type="button"
           value="Iniciar Sesión"
-          onChange={(evento) => {
-            evento.preventDefault();
-            enviarFormulario();
-          }} />
+          onClick={() => {
+            enviarFormularioSesion();
+          }}
+        />
+        <input
+          type="button"
+          value="Limpiar"
+          onClick={() => {
+            limpiarFormulario();
+          }}
+        />
       </form>
+      <Errores error={error} mensaje={mensaje} />
     </div>
   )
 }

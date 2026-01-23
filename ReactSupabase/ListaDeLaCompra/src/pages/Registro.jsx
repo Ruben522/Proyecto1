@@ -3,6 +3,7 @@ import "./Formulario.css";
 import useSupabase from "../hooks/useSupabase.js";
 import Errores from "../pages/Errores.jsx";
 
+// Página de registro de nuevos usuarios.
 const Registro = () => {
   const {
     actualizarDato,

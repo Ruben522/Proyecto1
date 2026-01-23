@@ -8,6 +8,7 @@ import IniciarSesion from "../pages/IniciarSesion.jsx";
 
 // Componente que contiene las rutas de la aplicación.
 const Rutas = () => {
+
     return (
         <Routes>
             <Route path="/" element={<Inicio />} />

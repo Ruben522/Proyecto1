@@ -28,3 +28,11 @@
     padding: 5px 10px;
     border-radius: 4px;
 }
+
+.quitar-sesion {
+    margin-left: 10px;
+    color: rgb(220, 9, 9);
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #f8d7da;
+}
