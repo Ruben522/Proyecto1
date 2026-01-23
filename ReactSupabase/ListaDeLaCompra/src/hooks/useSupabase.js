@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
-import { ContextoSesion } from "../context/ProveedorSesion.jsx";
+import { sesion } from "../contexts/ProveedorSesion.jsx";
 
 const useSupabase = () => {
-  /**
-   * Hook personalizado para consumir el contexto de la sesión de forma segura.
-   * Lanza un error si se intenta usar fuera de su proveedor.
-   */
-  const contexto = useContext(ContextoSesion);
+    /**
+     * Hook personalizado para consumir el contexto de la sesión de forma segura.
+     * Lanza un error si se intenta usar fuera de su proveedor.
+     */
+    const contexto = useContext(sesion);
 
-  if (!contexto) {
-    throw new Error(
-      "El hook useSupabase debe ser utilizado dentro de <ProveedorSesion>."
-    );
-  }
+    if (!contexto) {
+        throw new Error(
+            "El hook useSupabase debe ser utilizado dentro de <ProveedorSesion>.",
+        );
+    }
 
-  return contexto;
+    return contexto;
 };
 
 export default useSupabase;

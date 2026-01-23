@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useSesion from "../hooks/useSesion.js";
 import validar from "../library/validar.js";
+import useSesion from "../hooks/useSesion.js";
+import Errores from "../pages/Errores.jsx";
 
 const sesion = createContext();
 
@@ -29,7 +30,6 @@ const ProveedorSesion = ({ children }) => {
   const guardarUsuario = async (datosDisco) => {
     try {
       const respuesta = await crearCuenta(datosSesion);
-      setMensaje("Disco guardado correctamente");
       setDatosSesion(datosSesionInicial);
     } catch (error) {
       setError(`Ha ocurrido un error al crear la sesión: ${error.message}`);
@@ -38,13 +38,19 @@ const ProveedorSesion = ({ children }) => {
   const enviarFormulario = async () => {
     setError("");
     setMensaje("");
-
+    console.log("¡Botón pulsado correctamente!");
+    console.log("Datos a enviar:", datosSesion);
     const errores = validar(datosSesion);
     if (errores.length > 0) {
       setError(errores.join(" "));
       return;
-    } else {
-      guardarUsuario(datosSesion);
+    }
+    try {
+      await guardarUsuario(datosSesion);
+      limpiarFormulario();
+      setMensaje("Cuenta creada correctamente. Se ha enviado un correo de verificación.");
+    } catch (error) {
+      setError(error.message);
     }
   };
   const limpiarFormulario = () => {
@@ -54,14 +60,18 @@ const ProveedorSesion = ({ children }) => {
   };
 
   const actualizarDato = (evento) => {
-		const { name, value } = evento.target;
-		setDatosSesion((user) => ({ ...user, [name]: value }));
-	};
+    const { name, value } = evento.target;
+    setDatosSesion((user) => ({ ...user, [name]: value }));
+
+  };
 
   const exportar = {
     enviarFormulario,
     limpiarFormulario,
     actualizarDato,
+    error,
+    mensaje,
+    datosSesion,
   };
 
   return <sesion.Provider value={exportar}>{children}</sesion.Provider>;

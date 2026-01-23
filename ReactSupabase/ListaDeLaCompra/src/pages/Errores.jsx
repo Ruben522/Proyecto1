@@ -4,7 +4,6 @@ import React from "react";
 const Errores = ({ error, mensaje }) => {
   return (
     <>
-      <h2>Error</h2>
       <p>{error}{mensaje}</p>
     </>
   );

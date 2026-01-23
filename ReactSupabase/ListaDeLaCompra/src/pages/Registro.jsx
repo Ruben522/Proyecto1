@@ -1,57 +1,71 @@
 import React from 'react';
 import "./Formulario.css";
-import useSesion from "../hooks/useSesion.js";
+import useSupabase from "../hooks/useSupabase.js";
+import Errores from "../pages/Errores.jsx";
 
-// Página de registro. Se requiere: nombre, correo y contraseña.
-// (AMPLIACIÓN) Si ya hay un correo registrado, se informará al usuario.
 const Registro = () => {
-
   const {
     actualizarDato,
     enviarFormulario,
     limpiarFormulario,
-  } = useSesion();
+    mensaje,
+    error,
+    datosSesion,
+  } = useSupabase();
+
   return (
-    <div>
+    <div className="formulario">
       <h1>Registrarse</h1>
-      <form id="formulario" name="formulario">
-        <label htmlFor="email">Nombre o usuario</label>
-        <input type="text"
+
+      <form id="formulario">
+        <label htmlFor="name">Nombre o usuario</label>
+        <input
+          type="text"
           id="name"
-          className='name'
+          name="name"
           placeholder="Tiburón_Vegano_33"
-          onChange={(evento) => {
-            actualizarDato(evento);
-          }} />
+          value={datosSesion.name}
+          onChange={(evento) => actualizarDato(evento)}
+        />
 
         <label htmlFor="email">Correo Electrónico</label>
-        <input type="email"
+        <input
+          type="email"
           id="email"
-          className='email'
+          name="email"
           placeholder="ejemplo@gmail.com"
-          onChange={(evento) => {
-            actualizarDato(evento);
-          }} />
+          value={datosSesion.email}
+          onChange={(evento) => actualizarDato(evento)}
+        />
 
         <label htmlFor="password">Contraseña</label>
-        <input type="password"
-          id='password'
-          className='password'
-          placeholder="Contraseña"
-          onChange={() => {
-            actualizarDato(evento);
-          }} />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Mínimo 8 caracteres"
+          value={datosSesion.password}
+          onChange={(evento) => actualizarDato(evento)}
+        />
 
-        <input type="button"
+        <input
+          type="button"
           value="Registrarme"
-          onChange={(evento) => {
-            evento.preventDefault();
+          onClick={() => {
             enviarFormulario();
+          }}
+        />
+        <input
+          type="button"
+          value="Limpiar"
+          onClick={() => {
             limpiarFormulario();
-          }} />
+          }}
+        />
       </form>
+      <Errores error={error} mensaje={mensaje} />
     </div>
   )
 }
 
-export default Registro
+export default Registro;
