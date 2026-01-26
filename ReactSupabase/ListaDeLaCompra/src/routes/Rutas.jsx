@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Inicio from "../pages/Inicio.jsx";
-import Lista from "../pages/Lista.jsx";
+import Lista from "../pages/ListaProductos.jsx";
 import Error from "../pages/Errores.jsx";
 import Registrarse from "../pages/Registro.jsx";
 import IniciarSesion from "../pages/IniciarSesion.jsx";

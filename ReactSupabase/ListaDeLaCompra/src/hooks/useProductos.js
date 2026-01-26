@@ -4,7 +4,7 @@ const useProductos = () => {
     const listarProductos = async () => {
         try {
             const { data, error } = await supabaseConexion
-                .from("Productos")
+                .from("productos")
                 .select("*");
             return data;
         } catch (error) {

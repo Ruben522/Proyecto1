@@ -5,8 +5,6 @@ import "./Lista.css";
 const Lista = ({ productos }) => {
     return (
         <div className='lista'>
-            <h3>Lista de la Compra</h3>
-
             {productos.length === 0 ? (
                 <h2>No hay productos disponibles.</h2>
             ) : (
@@ -14,9 +12,10 @@ const Lista = ({ productos }) => {
                     {productos.map((prod) => (
                         <Producto
                             key={prod.id}
-                            nombre={prod.nombre}
-                            precio={prod.precio}
-                            peso={prod.peso}
+                            name={prod.name}
+                            price={prod.price}
+                            weight={prod.weight}
+                            image={prod.image_url}
                         />
                     ))}
                 </div>

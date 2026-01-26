@@ -29,3 +29,7 @@
     color: #666;
     font-size: 0.9rem;
 }
+.imagen-producto img {
+    max-width: 80px;
+    border-radius: 5px;
+}

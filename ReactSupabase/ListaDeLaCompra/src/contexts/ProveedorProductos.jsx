@@ -11,20 +11,18 @@ const ProveedorProductos = ({ children }) => {
     const productosIniciales = [];
     const mensajeInicial = "";
     const errorInicial = "";
+    let resultadoFiltro = "";
 
-    const [listaProductos, setListaProductos] = useState(
-        productosIniciales,
-    );
+    const [listaProductos, setListaProductos] = useState(productosIniciales);
+    const [listaFiltrada, setListaFiltrada] = useState(productosIniciales)
     const [mensaje, setMensaje] = useState(mensajeInicial);
     const [error, setError] = useState(errorInicial);
-
     const { listarProductos } = useProductos();
 
     useEffect(() => {
         const obtenerProductos = async () => {
             try {
                 const respuesta = await listarProductos();
-                console.log(respuesta)
                 setListaProductos(respuesta);
             } catch (error) {
                 setError("Error al cargar los productos.");
@@ -34,8 +32,39 @@ const ProveedorProductos = ({ children }) => {
         obtenerProductos();
     }, []);
 
+    const filtrarPorNombre = (nombre) => {
+        resultadoFiltro = listaProductos.filter((producto) =>
+            producto.name
+                .toLowerCase()
+                .includes(nombre.toLowerCase()),
+        );
+        setListaProductos(resultadoFiltro);
+    }
+
+    const filtrarPorPeso = (peso) => {
+        resultadoFiltro = listaProductos.filter((producto) =>
+            producto.weight === peso
+        );
+        setListaProductos(resultadoFiltro);
+    }
+
+    const filtrarPorPrecio = (precio) => {
+        resultadoFiltro = listaProductos.filter((producto) =>
+            producto.price === precio
+        );
+        setListaProductos(resultadoFiltro);
+    }
+
+    const limpiarFiltro = () => {
+        setListaProductos(listaProductos);
+    }
+
     const exportar = {
         listaProductos,
+        filtrarPorNombre,
+        filtrarPorPeso,
+        filtrarPorPrecio,
+        limpiarFiltro,
         mensaje,
         error,
     };
