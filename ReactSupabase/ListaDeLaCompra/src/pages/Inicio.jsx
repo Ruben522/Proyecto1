@@ -1,10 +1,10 @@
 import React from 'react'
 import "./Inicio.css";
-import useSupabase from "../hooks/useSupabase.js";
+import useSupabaseSesion from "../hooks/useSupabaseSesion.js";
 // Página de inicio de la aplicación a la que reedigiremos a un usuario que recien se logea.
 const Inicio = () => {
 
-  const { usuario } = useSupabase();
+  const { usuario } = useSupabaseSesion();
 
   return (
     <div className="inicio">

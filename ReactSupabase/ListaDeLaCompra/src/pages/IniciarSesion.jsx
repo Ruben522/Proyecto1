@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Formulario.css"
-import useSupabase from "../hooks/useSupabase.js";
+import useSupabaseSesion from "../hooks/useSupabaseSesion.js";
 import Errores from "../pages/Errores.jsx";
 
 // Página para iniciar sesión. Se requiere correo y contraseña.
@@ -13,7 +13,7 @@ const IniciarSesion = () => {
     mensaje,
     error,
     datosSesion,
-  } = useSupabase();
+  } = useSupabaseSesion();
 
   return (
     <div className='formulario'>

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "./Menu.css";
-import useSupabase from "../hooks/useSupabase.js";
+import useSupabaseSesion from "../hooks/useSupabaseSesion.js";
 
 // Componente que contiene los links a las partes de la aplicación.
 const Menu = () => {
-    const { sesionIniciada } = useSupabase();
-
+    const { sesionIniciada } = useSupabaseSesion();
     return (
         <div className='menu-links'>
             <Link className="inicio" to="/">Inicio</Link>

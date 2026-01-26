@@ -2,12 +2,12 @@ import React from 'react'
 import logo from "../assets/imgs/logo.png"
 import { Link } from 'react-router-dom'
 import "./Cabecera.css"
-import useSupabase from '../hooks/useSupabase'
+import useSupabaseSesion from '../hooks/useSupabaseSesion'
 
 // Componente que contiene el logo de la web y las rutas para iniciar sesión o registrarse.
 // Estas rutas serán sustituidas si estamos logeados, mostrando un botón para cerrar sesión.
 const Cabecera = () => {
-  const { sesionIniciada, quitarSesion, usuario } = useSupabase();
+  const { sesionIniciada, quitarSesion, usuario } = useSupabaseSesion();
 
   return (
     <div className='cabecera'>

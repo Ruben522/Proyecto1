@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Formulario.css";
-import useSupabase from "../hooks/useSupabase.js";
+import useSupabaseSesion from "../hooks/useSupabaseSesion.js";
 import Errores from "../pages/Errores.jsx";
 
 // Página de registro de nuevos usuarios.
@@ -12,7 +12,7 @@ const Registro = () => {
     mensaje,
     error,
     datosSesion,
-  } = useSupabase();
+  } = useSupabaseSesion();
 
   return (
     <div className="formulario">
