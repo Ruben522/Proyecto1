@@ -1,6 +1,10 @@
 import { supabaseConexion } from "../supabase/Supabase.js";
+import { useNavigate } from "react-router-dom";
 
 export const useSesion = () => {
+
+    const navegar = useNavigate();
+
     const crearCuenta = async (datosSesion) => {
         try {
             const { data, error } =

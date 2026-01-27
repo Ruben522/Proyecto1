@@ -1,38 +1,55 @@
 .cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    border: 3px solid #0d2f46;
-    padding: 15px;
-    margin-bottom: 10px;
-    background-color: rgb(95, 160, 198);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background-color: #d8d8ee;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+/* Logo */
 .cabecera img {
-    height: 50px;
+  width: 50px;
+  height: auto;
 }
 
+/* Título */
 .cabecera h1 {
-    flex-grow: 1;
-    margin-left: 20px;
-    font-size: 1.5rem;
-    color: #0a141b;
+  flex: 1;
+  font-size: 1.6rem;
+  color: #111827;
 }
 
+/* Links de login / registro */
 .cabecera a {
-    text-decoration: none;
-    color: #333;
-    margin-left: 15px;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 4px;
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #4f46e5;
+  font-weight: 500;
 }
 
+.cabecera a:hover {
+  text-decoration: underline;
+}
+
+/* Texto usuario */
+.cabecera p {
+  margin: 0 1rem 0 0;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Botón cerrar sesión */
 .quitar-sesion {
-    margin-left: 10px;
-    color: rgb(220, 9, 9);
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #f8d7da;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #dc2626;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.quitar-sesion:hover {
+  background-color: #b91c1c;
 }
