@@ -3,6 +3,10 @@ import Producto from './Producto';
 import "./Lista.css";
 
 // Componente que recorre la lista de productos.
+
+/* He aprovechado que usamos supabase para usar su función storage para
+crear una carpeta productos, guardar ahí las imágenes
+y obtener la URL de la imagen desde allí */
 const Lista = ({ productos }) => {
 
     return (

@@ -5,8 +5,8 @@ import useSupabaseProductos from "../hooks/useSupabaseProductos";
 import Lista from "../components/Lista";
 import "./ListaProductos.css";
 
-// Páina que muestra la lista con sus productos.
-// Contendrá acciones sobre el listado.
+// Página que muestra la lista con sus productos.
+// Contiene filtros y ordenación de los productos.
 const ListaProductos = () => {
   const { sesionIniciada } = useSupabaseSesion();
   const {
