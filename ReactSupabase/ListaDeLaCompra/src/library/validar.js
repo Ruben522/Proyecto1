@@ -22,6 +22,27 @@ const validarPeso = (peso) => {
     return peso > 0;
 };
 
+const fechaACastellano = (fecha) => {
+    return new Date(fecha).toLocaleDateString("es-ES");
+};
+
+const sonKilos = (peso) => {
+    if (peso >= 1000) {
+        const kilos = peso / 1000;
+        return `${kilos} kg`;
+    } else {
+        return `${peso} g`;
+    }
+};
+
+const numeroACastellano = (numero) => {
+    return numero.toLocaleString("es-ES");
+};
+
+const redondearADosDecimales = (numero) => {
+    return Math.round(numero * 100) / 100;
+}
+
 const validarSesion = (datos) => {
     let errores = [];
     if (estaVacio(datos.email))
@@ -69,7 +90,7 @@ const validarProducto = (datos) => {
         errores = [
             ...errores,
             "El precio del producto debe ser mayor que 0.",
-        ];
+        ];  
     if (!validarPeso(datos.weight))
         errores = [
             ...errores,
@@ -79,4 +100,4 @@ const validarProducto = (datos) => {
     return errores;
 };
 
-export { validar, validarSesion, validarProducto };
+export { validar, validarSesion, validarProducto, fechaACastellano, numeroACastellano, sonKilos, redondearADosDecimales };

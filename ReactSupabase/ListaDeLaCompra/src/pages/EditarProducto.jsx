@@ -2,21 +2,32 @@ import React from 'react'
 import "./Formulario.css"
 import useSupabaseProductos from "../hooks/useSupabaseProductos.js";
 import Errores from "../pages/Errores.jsx";
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-// Página para crear un nuevo producto.
-const CrearProducto = () => {
+// Página para editar.
+const EditarProducto = () => {
     const {
         actualizarDato,
-        enviarFormularioProducto,
+        enviarFormularioProductoEditado,
         limpiarFormulario,
         mensaje,
         error,
         producto,
+        cargarProductoPorId,
     } = useSupabaseProductos();
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        if (id) {
+            cargarProductoPorId(id);
+        }
+    }, [id]);
 
     return (
         <div className='formulario'>
-            <h1>Crear Producto</h1>
+            <h1>Editar Producto</h1>
             <form id="formulario">
                 <label htmlFor="name">Nombre del Producto</label>
                 <input
@@ -72,9 +83,9 @@ const CrearProducto = () => {
                 />
                 <input
                     type="button"
-                    value="Crear Producto"
+                    value="Editar Producto"
                     onClick={() => {
-                        enviarFormularioProducto();
+                        enviarFormularioProductoEditado();
                     }}
                 />
             </form>
@@ -83,4 +94,4 @@ const CrearProducto = () => {
     )
 }
 
-export default CrearProducto
+export default EditarProducto

@@ -18,6 +18,7 @@ const Lista = ({ productos }) => {
                         name={prod.name}
                         price={prod.price}
                         weight={prod.weight}
+                        description={prod.description}
                         image={prod.image_url}
                     />
                 ))}

@@ -5,10 +5,11 @@ import editar from "../assets/imgs/editar.png";
 import useSupabaseProductos from '../hooks/useSupabaseProductos';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { sonKilos, numeroACastellano } from '../library/validar.js';
 
 
 // Componente que recibe como props los campos de la tabla de productos para crear un producto
-const Producto = ({ id, name, price, weight, image }) => {
+const Producto = ({ id, name, price, weight, image, description }) => {
 
   const navegar = useNavigate();
   const { borrarProducto, editarProductos } = useSupabaseProductos();
@@ -25,11 +26,13 @@ const Producto = ({ id, name, price, weight, image }) => {
         <img src={editar} alt="Editar" onClick={() => setConfirmacionEditar(id)} />
       </div>
       <h2>{name}</h2>
-      <p><strong>Precio: {price} €</strong></p>
-      <p>Peso: {weight}g</p>
+      <p><strong>Precio: {numeroACastellano(price)}€</strong></p>
+      <p>Peso: {sonKilos(weight)}</p>
+      <p>{description}</p>
       <div className='imagen-producto'>
         <img src={image} alt={name} />
       </div>
+
       {confirmacionBorrar && (
         <div className='confirmacion'>
           <p>¿Estás seguro de que quieres eliminar el producto?</p>

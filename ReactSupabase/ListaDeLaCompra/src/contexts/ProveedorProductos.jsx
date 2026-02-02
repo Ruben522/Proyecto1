@@ -4,11 +4,12 @@ import React, {
     useState,
 } from "react";
 import useProductos from "../hooks/useProductos.js";
-import { validarProducto } from "../library/validar.js";
+import { validarProducto, numeroACastellano, redondearADosDecimales } from "../library/validar.js";
 
 const productos = createContext();
 
 const ProveedorProductos = ({ children }) => {
+
     const productoInicial = {
         name: "",
         price: Number(""),
@@ -16,6 +17,7 @@ const ProveedorProductos = ({ children }) => {
         image_url: "",
     };
     const productosIniciales = [];
+    const confirmacionInicial = false;
     const mensajeInicial = "";
     const errorInicial = "";
     let resultadoFiltro = "";
@@ -26,6 +28,7 @@ const ProveedorProductos = ({ children }) => {
     const [listaFiltrada, setListaFiltrada] = useState(productosIniciales)
     const [mensaje, setMensaje] = useState(mensajeInicial);
     const [error, setError] = useState(errorInicial);
+    const [confirmacion, setConfirmacion] = useState(confirmacionInicial);
     const { listarProductos, crearProductos, editarProducto, eliminarProducto } = useProductos();
 
     useEffect(() => {
@@ -134,7 +137,8 @@ const ProveedorProductos = ({ children }) => {
         if (listaFiltrada.length === 0) {
             return 0
         }
-        return (precioTotal / listaFiltrada.length);
+        const redondeado = redondearADosDecimales(precioTotal / listaFiltrada.length);
+        return numeroACastellano(redondeado);
     }
 
     const productosTotales = () => {
@@ -186,11 +190,32 @@ const ProveedorProductos = ({ children }) => {
         }
     };
 
+    const enviarFormularioProductoEditado = async () => {
+        setError("");
+        setMensaje("");
+        const errores = validarProducto(producto);
+
+        if (errores.length > 0) {
+            setError(errores.join(" "));
+            return;
+        }
+        try {
+            await editarProductos(producto);
+            limpiarFormulario();
+            setMensaje("Producto editado correctamente.");
+        } catch (error) {
+            setError("Error al editar el producto.");
+        }
+    };
+
     const cargarProductoPorId = (id) => {
         const productoEncontrado = listaProductos.find((prod) => prod.id === (id));
         if (productoEncontrado) {
             setProducto(productoEncontrado);
         }
+    }
+    const confirmar = (valor) => {
+        setConfirmacion(valor);
     }
 
     const exportar = {
@@ -213,6 +238,8 @@ const ProveedorProductos = ({ children }) => {
         enviarFormularioProducto,
         limpiarFormulario,
         cargarProductoPorId,
+        enviarFormularioProductoEditado,
+        confirmar,
         mensaje,
         error,
     };
