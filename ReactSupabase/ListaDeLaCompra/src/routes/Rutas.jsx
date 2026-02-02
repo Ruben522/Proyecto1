@@ -5,6 +5,7 @@ import Lista from "../pages/ListaProductos.jsx";
 import Error from "../pages/Errores.jsx";
 import Registrarse from "../pages/Registro.jsx";
 import IniciarSesion from "../pages/IniciarSesion.jsx";
+import CrearProducto from "../pages/CrearProducto.jsx";
 
 // Componente que contiene las rutas de la aplicación.
 const Rutas = () => {
@@ -15,6 +16,8 @@ const Rutas = () => {
             <Route path="/lista" element={<Lista />} />
             <Route path="/registro" element={<Registrarse />} />
             <Route path="/iniciar-sesion" element={<IniciarSesion />} />
+            <Route path="/crear-producto" element={<CrearProducto />} />
+            <Route path="/editar-producto/:id" element={<CrearProducto />} />
             <Route path='*' element={<Error />} />
         </Routes>
 

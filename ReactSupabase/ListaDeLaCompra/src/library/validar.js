@@ -14,6 +14,14 @@ const validarContraseña = (caracteres) => {
     return caracteres.length >= 8;
 };
 
+const validarPrecio = (precio) => {
+    return precio > 0;
+};
+
+const validarPeso = (peso) => {
+    return peso > 0;
+};
+
 const validarSesion = (datos) => {
     let errores = [];
     if (estaVacio(datos.email))
@@ -49,4 +57,26 @@ const validar = (datos) => {
     return errores;
 };
 
-export { validar, validarSesion };
+const validarProducto = (datos) => {
+    let errores = [];
+
+    if (estaVacio(datos.name))
+        errores = [
+            ...errores,
+            "El nombre del producto es obligatorio.",
+        ];
+    if (!validarPrecio(datos.price))
+        errores = [
+            ...errores,
+            "El precio del producto debe ser mayor que 0.",
+        ];
+    if (!validarPeso(datos.weight))
+        errores = [
+            ...errores,
+            "El peso del producto debe ser mayor que 0.",
+        ];
+
+    return errores;
+};
+
+export { validar, validarSesion, validarProducto };

@@ -4,23 +4,29 @@ import React, {
     useState,
 } from "react";
 import useProductos from "../hooks/useProductos.js";
+import { validarProducto } from "../library/validar.js";
 
 const productos = createContext();
 
 const ProveedorProductos = ({ children }) => {
+    const productoInicial = {
+        name: "",
+        price: Number(""),
+        weight: Number(""),
+        image_url: "",
+    };
     const productosIniciales = [];
     const mensajeInicial = "";
     const errorInicial = "";
-    
     let resultadoFiltro = "";
     let ordenada = [];
 
+    const [producto, setProducto] = useState(productoInicial);
     const [listaProductos, setListaProductos] = useState(productosIniciales);
     const [listaFiltrada, setListaFiltrada] = useState(productosIniciales)
     const [mensaje, setMensaje] = useState(mensajeInicial);
     const [error, setError] = useState(errorInicial);
-
-    const { listarProductos } = useProductos();
+    const { listarProductos, crearProductos, editarProducto, eliminarProducto } = useProductos();
 
     useEffect(() => {
         const obtenerProductos = async () => {
@@ -34,6 +40,50 @@ const ProveedorProductos = ({ children }) => {
         };
         obtenerProductos();
     }, []);
+
+    const crearNuevoProducto = async (datos) => {
+        try {
+            const respuesta = await crearProductos(datos);
+            const nuevosProductos = await listarProductos();
+            setListaProductos(nuevosProductos);
+            setListaFiltrada(nuevosProductos);
+        } catch (error) {
+            setError("Error al crear el producto.");
+        }
+    };
+    const editarProductos = async (datos) => {
+        try {
+            const respuesta = await editarProducto(datos);
+            const nuevosDatos = await listarProductos();
+            setListaProductos(nuevosDatos);
+            setListaFiltrada(nuevosDatos);
+            setMensaje("Producto editado correctamente.");
+
+        } catch (error) {
+            setError("Error al editar el producto.");
+        }
+    };
+
+    const borrarProducto = async (id) => {
+        try {
+            const respuesta = await eliminarProducto(id);
+            const datos = await listarProductos();
+            setListaProductos(datos);
+            setListaFiltrada(datos);
+            setMensaje("Producto eliminado correctamente.");
+
+        } catch (error) {
+            setError("Error al eliminar el producto.");
+        }
+    };
+
+    const actualizarDato = (evento) => {
+        const { name, value } = evento.target;
+        setProducto((producto) => ({
+            ...producto,
+            [name]: value,
+        }));
+    };
 
     const filtrarPorNombre = (nombre) => {
         setMensaje("");
@@ -112,6 +162,36 @@ const ProveedorProductos = ({ children }) => {
         setListaFiltrada(ordenada);
     };
 
+    const limpiarFormulario = () => {
+        setProducto(productoInicial);
+        setMensaje("");
+        setError("");
+    };
+
+    const enviarFormularioProducto = async () => {
+        setError("");
+        setMensaje("");
+        const errores = validarProducto(producto);
+
+        if (errores.length > 0) {
+            setError(errores.join(" "));
+            return;
+        }
+        try {
+            await crearNuevoProducto(producto);
+            limpiarFormulario();
+            setMensaje("Producto creado correctamente.");
+        } catch (error) {
+            setError("Error al crear el producto.");
+        }
+    };
+
+    const cargarProductoPorId = (id) => {
+        const productoEncontrado = listaProductos.find((prod) => prod.id === (id));
+        if (productoEncontrado) {
+            setProducto(productoEncontrado);
+        }
+    }
 
     const exportar = {
         listaProductos,
@@ -125,6 +205,14 @@ const ProveedorProductos = ({ children }) => {
         ordenarPorPeso,
         productosTotales,
         precioMedio,
+        crearNuevoProducto,
+        editarProductos,
+        borrarProducto,
+        producto,
+        actualizarDato,
+        enviarFormularioProducto,
+        limpiarFormulario,
+        cargarProductoPorId,
         mensaje,
         error,
     };

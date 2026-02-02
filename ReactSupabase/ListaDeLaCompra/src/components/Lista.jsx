@@ -1,7 +1,6 @@
 import React from 'react';
 import Producto from './Producto';
 import "./Lista.css";
-
 // Componente que recorre la lista de productos.
 
 /* He aprovechado que usamos supabase para usar su función storage para
@@ -15,6 +14,7 @@ const Lista = ({ productos }) => {
                 {productos.map((prod) => (
                     <Producto
                         key={prod.id}
+                        id={prod.id}
                         name={prod.name}
                         price={prod.price}
                         weight={prod.weight}
