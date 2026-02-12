@@ -1,18 +1,15 @@
 import React from 'react'
 import "./Formulario.css"
 import useSupabaseProductos from "../hooks/useSupabaseProductos.js";
-import Errores from "../pages/Errores.jsx";
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-// Página para editar.
+// Página para editar un producto mediante su id.
 const EditarProducto = () => {
     const {
         actualizarDato,
         enviarFormularioProductoEditado,
         limpiarFormulario,
-        mensaje,
-        error,
         producto,
         cargarProductoPorId,
     } = useSupabaseProductos();
@@ -74,6 +71,7 @@ const EditarProducto = () => {
                     value={producto.image_url}
                     onChange={(evento) => actualizarDato(evento)}
                 />
+                <img src={producto.image_url} alt={producto.name} />
                 <input
                     type="button"
                     value="Limpiar"
@@ -89,7 +87,6 @@ const EditarProducto = () => {
                     }}
                 />
             </form>
-            <Errores error={error} mensaje={mensaje} />
         </div>
     )
 }

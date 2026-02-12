@@ -6,36 +6,49 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import { validar, validarSesion } from "../library/validar.js";
 import useSesion from "../hooks/useSesion.js";
+import useNotificaciones from "../hooks/useNotificaciones.js";
+import { supabaseConexion } from "../supabase/Supabase.js";
 
+/* Proveedor de la sesión de usuarios */
 const sesion = createContext();
 
 const ProveedorSesion = ({ children }) => {
   const navegar = useNavigate();
   const { crearCuenta, iniciarSesion, cerrarSesion, cargarUsuario } = useSesion();
+  const { notificar } = useNotificaciones();
 
   const datosSesionInicial = {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   };
-  const mensajeInicial = "";
-  const errorInicial = "";
   const usuarioInicial = {};
   const sesionIniciadaInicial = false;
 
   const [datosSesion, setDatosSesion] = useState(datosSesionInicial);
   const [usuario, setUsuario] = useState(usuarioInicial);
   const [sesionIniciada, setSesionIniciada] = useState(sesionIniciadaInicial);
-  const [mensaje, setMensaje] = useState(mensajeInicial);
-  const [error, setError] = useState(errorInicial);
+  const [error, setError] = useState(""); 
 
   useEffect(() => {
-    obtenerUsuario();
+    const subscripcion = supabaseConexion.auth.onAuthStateChange(
+      (evento, session) => {
+        if (session) {
+          setSesionIniciada(true);
+          obtenerUsuario();
+        } else {
+          setSesionIniciada(false);
+          navegar("/iniciar-sesion"); 
+        }
+      }
+    );
   }, []);
+
 
   const guardarUsuario = async () => {
     try {
-      const respuesta = await crearCuenta(datosSesion);
+      await crearCuenta(datosSesion);
       setDatosSesion(datosSesionInicial);
     } catch (error) {
       throw error;
@@ -46,37 +59,37 @@ const ProveedorSesion = ({ children }) => {
     try {
       const respuesta = await cargarUsuario();
       setUsuario({
+        id: respuesta.user.id,
         email: respuesta.user.email,
         name: respuesta.user.user_metadata?.name,
       });
-      setSesionIniciada(true);
     } catch (error) {
-      throw error;
+      notificar("Error al obtener el usuario", "error")
     }
   };
 
   const quitarSesion = async () => {
     try {
-      cerrarSesion();
-      setUsuario(usuarioInicial)
-      setSesionIniciada(false);
+      await cerrarSesion();
+      setUsuario(usuarioInicial);
       navegar("/");
+      notificar("Se ha cerrado sesión", "exito");
     } catch (error) {
-      setError("Error al cerrar sesión");
+      notificar("Error al cerrar sesión", "error");
     }
   };
 
   const iniciarSesionUsuario = async () => {
     try {
       const respuesta = await iniciarSesion(datosSesion);
-      setUsuario({
+      setUsuario(
+        respuesta.user
+        /*
         email: respuesta.user.email,
         // No sabía que se tenia que hacer así. Intentaba simplemente con respuesta.user.name pero no funcionaba.
         // Esta es la forma en la que chatGPT me ha indicado que se hace.
-        name: respuesta.user.user_metadata?.name,
-
-      })
-      setSesionIniciada(true);
+        name: respuesta.user.user_metadata?.name,*/
+      );
     } catch (error) {
       throw error;
     }
@@ -84,48 +97,42 @@ const ProveedorSesion = ({ children }) => {
 
   const enviarFormulario = async () => {
     setError("");
-    setMensaje("");
     const errores = validar(datosSesion);
     if (errores.length > 0) {
+      notificar(errores[0], "error");
       setError(errores.join(" "));
       return;
     }
     try {
       await guardarUsuario(datosSesion);
       limpiarFormulario();
-      setMensaje(
-        "Cuenta creada correctamente. Se ha enviado un correo de verificación.",
-      );
+      notificar("Cuenta creada correctamente. Se ha enviado un correo de verificación.", "exito");
     } catch (error) {
-      setError("Hubo un problema al crear la cuenta");
+      notificar("Hubo un problema al crear la cuenta", "error");
     }
   };
 
   const limpiarFormulario = () => {
     setDatosSesion(datosSesionInicial);
-    setMensaje("");
     setError("");
   };
 
-  // He hecho dos enviarFormulario porque si no, al iniciar sesión, me salta el error de
-  // validación de nombre (que no es necesario para iniciar sesión).
   const enviarFormularioSesion = async () => {
-    setMensaje("");
     setError("");
     const errores = validarSesion(datosSesion);
     if (errores.length > 0) {
+      notificar(errores[0], "error");
       setError(errores.join(" "));
       return;
     }
     try {
       await iniciarSesionUsuario(datosSesion);
       limpiarFormulario();
-      setMensaje(
-        "Sesión iniciada correctamente, redirigiendo...",
-      );
+      // Notificación de ÉXITO
+      notificar("Sesión iniciada.", "exito");
       navegar("/");
     } catch (error) {
-      setError("La cuenta no existe o las parámetros no son correctos.");
+      notificar("La cuenta no existe o las parámetros no son correctos.", "error");
     }
   };
 
@@ -143,9 +150,9 @@ const ProveedorSesion = ({ children }) => {
     actualizarDato,
     enviarFormularioSesion,
     error,
-    mensaje,
     datosSesion,
     usuario,
+    sesion,
     sesionIniciada,
     quitarSesion,
   };

@@ -3,11 +3,13 @@ import logo from "../assets/imgs/logo.png"
 import { Link } from 'react-router-dom'
 import "./Cabecera.css"
 import useSupabaseSesion from '../hooks/useSupabaseSesion'
+import useNotificaciones from '../hooks/useNotificaciones'
 
 // Componente que contiene el logo de la web y las rutas para iniciar sesión o registrarse.
 // Estas rutas serán sustituidas si estamos logeados, mostrando un botón para cerrar sesión.
 const Cabecera = () => {
   const { sesionIniciada, quitarSesion, usuario } = useSupabaseSesion();
+  const { pedirConfirmacion } = useNotificaciones();
 
   return (
     <div className='cabecera'>
@@ -26,7 +28,10 @@ const Cabecera = () => {
           <p>Hola, {usuario.name}</p>
           <button
             onClick={() => {
-              quitarSesion()
+              pedirConfirmacion(
+                "¿Estás seguro de que quieres cerrar sesión?",
+                () => quitarSesion()
+              )
             }}
             className="quitar-sesion"
           >

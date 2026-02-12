@@ -14,6 +14,13 @@ const validarContraseña = (caracteres) => {
     return caracteres.length >= 8;
 };
 
+const validarContraseñaIgual = (
+    contraseña1,
+    contraseña2,
+) => {
+    return contraseña1 === contraseña2;
+};
+
 const validarPrecio = (precio) => {
     return precio > 0;
 };
@@ -24,6 +31,10 @@ const validarPeso = (peso) => {
 
 const fechaACastellano = (fecha) => {
     return new Date(fecha).toLocaleDateString("es-ES");
+};
+
+const esCero = (cantidad) => {
+    return cantidad === 0;
 };
 
 const sonKilos = (peso) => {
@@ -41,7 +52,11 @@ const numeroACastellano = (numero) => {
 
 const redondearADosDecimales = (numero) => {
     return Math.round(numero * 100) / 100;
-}
+};
+
+const redondearATresDecimales = (numero) => {
+    return Math.round(numero * 1000) / 1000;
+};
 
 const validarSesion = (datos) => {
     let errores = [];
@@ -74,6 +89,16 @@ const validar = (datos) => {
             ...errores,
             "La contraseña debe tener al menos 8 caracteres.",
         ];
+    if (
+        !validarContraseñaIgual(
+            datos.password,
+            datos.confirmPassword,
+        )
+    )
+        errores = [
+            ...errores,
+            "Las contraseñas no coinciden.",
+        ];
 
     return errores;
 };
@@ -90,7 +115,7 @@ const validarProducto = (datos) => {
         errores = [
             ...errores,
             "El precio del producto debe ser mayor que 0.",
-        ];  
+        ];
     if (!validarPeso(datos.weight))
         errores = [
             ...errores,
@@ -99,5 +124,25 @@ const validarProducto = (datos) => {
 
     return errores;
 };
+const validarLista = (datos) => {
+    let errores = [];
 
-export { validar, validarSesion, validarProducto, fechaACastellano, numeroACastellano, sonKilos, redondearADosDecimales };
+    if (estaVacio(datos.name))
+        errores = [
+            ...errores,
+            "El nombre del producto es obligatorio.",
+        ];
+    return errores;
+};
+
+export {
+    validar,
+    validarSesion,
+    validarProducto,
+    validarLista,
+    fechaACastellano,
+    numeroACastellano,
+    sonKilos,
+    redondearADosDecimales,
+    redondearATresDecimales,
+};

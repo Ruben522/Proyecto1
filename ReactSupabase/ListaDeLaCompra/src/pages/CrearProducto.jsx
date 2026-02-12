@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Formulario.css"
 import useSupabaseProductos from "../hooks/useSupabaseProductos.js";
-import Errores from "../pages/Errores.jsx";
 
 // Página para crear un nuevo producto.
 const CrearProducto = () => {
@@ -78,7 +77,6 @@ const CrearProducto = () => {
                     }}
                 />
             </form>
-            <Errores error={error} mensaje={mensaje} />
         </div>
     )
 }

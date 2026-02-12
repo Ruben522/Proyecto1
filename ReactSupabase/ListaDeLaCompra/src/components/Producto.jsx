@@ -1,86 +1,91 @@
-import React from 'react'
-import "./Producto.css";
+import React, { useEffect } from "react";
 import borrar from "../assets/imgs/borrar.png";
 import editar from "../assets/imgs/editar.png";
-import useSupabaseProductos from '../hooks/useSupabaseProductos';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { sonKilos, numeroACastellano } from '../library/validar.js';
+import restar from "../assets/imgs/restar.png";
+import sumar from "../assets/imgs/sumar.png";
+import useSupabaseProductos from "../hooks/useSupabaseProductos.js";
+import useSupabaseSesion from "../hooks/useSupabaseSesion.js";
+import useNotificaciones from "../hooks/useNotificaciones.js";
+import useContextoListaProducto from "../hooks/useContextoListaProducto.js";
+import "./Producto.css";
+import { useNavigate } from "react-router-dom";
+import { sonKilos, numeroACastellano } from "../library/validar.js";
 
+//Componente producto con restricciones de accesibilidad para usuarios no logeados.
 
-// Componente que recibe como props los campos de la tabla de productos para crear un producto
 const Producto = ({ id, name, price, weight, image, description }) => {
-
   const navegar = useNavigate();
-  const { borrarProducto, editarProductos } = useSupabaseProductos();
-  const confirmacionInicial = false
-  const [confirmacionBorrar, setConfirmacionBorrar] = useState(confirmacionInicial);
-  const [confirmacionEditar, setConfirmacionEditar] = useState(confirmacionInicial);
+  const { pedirConfirmacion } = useNotificaciones();
+  const { borrarProducto } = useSupabaseProductos();
+  const { sesionIniciada } = useSupabaseSesion();
+  const { listaId, obtenerCantidad, sumarProducto, restarProducto } =
+    useContextoListaProducto();
+  const cantidad = obtenerCantidad(id);
 
   return (
-    <div className='producto'>
-      <div className='borrar'>
-        <img src={borrar} alt="borrar" onClick={() => setConfirmacionBorrar(id)} />
-      </div>
-      <div className='editar'>
-        <img src={editar} alt="Editar" onClick={() => setConfirmacionEditar(id)} />
-      </div>
-      <h2>{name}</h2>
-      <p><strong>Precio: {numeroACastellano(price)}€</strong></p>
-      <p>Peso: {sonKilos(weight)}</p>
-      <p>{description}</p>
-      <div className='imagen-producto'>
-        <img src={image} alt={name} />
-      </div>
+    <>
+      <div className="producto">
+        {sesionIniciada && (
+          <>
+            <div className="borrar">
+              <img
+                src={borrar}
+                alt="borrar"
+                onClick={() =>
+                  pedirConfirmacion(
+                    "¿Estás seguro de que quieres eliminar este producto?",
+                    () => borrarProducto(id),
+                  )
+                }
+              />
+            </div>
 
-      {confirmacionBorrar && (
-        <div className='confirmacion'>
-          <p>¿Estás seguro de que quieres eliminar el producto?</p>
-          <div className="acciones">
-            <button
-              className="si"
-              onClick={() => {
-                borrarProducto(id);
-                setConfirmacionBorrar(confirmacionInicial);
-              }}
-            >
-              Borrar
-            </button>
-            <button
-              className="no"
-              onClick={() => setConfirmacionBorrar(confirmacionInicial)}
-            >
-              No
-            </button>
-          </div>
+            <div className="editar">
+              <img
+                src={editar}
+                alt="editar"
+                onClick={() =>
+                  pedirConfirmacion(
+                    "¿Estás seguro de que quieres editar este producto?",
+                    () => navegar(`/editar-producto/${id}`),
+                  )
+                }
+              />
+            </div>
+          </>
+        )}
+        <h2>{name}</h2>
+        <p>
+          <strong>Precio: {numeroACastellano(price)}€</strong>
+        </p>
+        <p>Peso: {sonKilos(weight)}</p>
+        <p>{description}</p>
+
+        <div className="imagen-producto">
+          <img src={image} alt={name} />
         </div>
+        {listaId && (
+          <>
+            {cantidad > 0 && (
+              <div className="restar">
+                <img
+                  src={restar}
+                  alt="restar"
+                  onClick={() => restarProducto(id)}
+                />
+              </div>
+            )}
 
-      )}
-      {confirmacionEditar && (
-        <div className='confirmacion'>
-          <p>¿Estás seguro de que quieres editar el producto?</p>
-          <div className="acciones">
-            <button
-              className="si"
-              onClick={() => {
-                navegar(`/editar-producto/${id}`);
-                setConfirmacionEditar(confirmacionInicial);
-              }}
-            >
-              Editar
-            </button>
-            <button
-              className="no"
-              onClick={() => setConfirmacionEditar(confirmacionInicial)}
-            >
-              No
-            </button>
-          </div>
-        </div>
-      )
-      }
-    </div>
-  )
-}
+            <p>{cantidad}</p>
 
-export default Producto
+            <div className="sumar">
+              <img src={sumar} alt="sumar" onClick={() => sumarProducto(id)} />
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Producto;

@@ -3,9 +3,12 @@ import React, {
     useEffect,
     useState,
 } from "react";
-import useProductos from "../hooks/useProductos.js";
+import usePeticiones from "../hooks/usePeticiones.js";
+import useNotificaciones from "../hooks/useNotificaciones.js";
 import { validarProducto, numeroACastellano, redondearADosDecimales } from "../library/validar.js";
+import { useNavigate } from "react-router-dom";
 
+/* Proveedor de productos */
 const productos = createContext();
 
 const ProveedorProductos = ({ children }) => {
@@ -14,10 +17,10 @@ const ProveedorProductos = ({ children }) => {
         name: "",
         price: Number(""),
         weight: Number(""),
+        description: "",
         image_url: "",
     };
     const productosIniciales = [];
-    const confirmacionInicial = false;
     const mensajeInicial = "";
     const errorInicial = "";
     let resultadoFiltro = "";
@@ -28,17 +31,23 @@ const ProveedorProductos = ({ children }) => {
     const [listaFiltrada, setListaFiltrada] = useState(productosIniciales)
     const [mensaje, setMensaje] = useState(mensajeInicial);
     const [error, setError] = useState(errorInicial);
-    const [confirmacion, setConfirmacion] = useState(confirmacionInicial);
-    const { listarProductos, crearProductos, editarProducto, eliminarProducto } = useProductos();
+
+    const { listarTodo,
+        crear,
+        editarPorId,
+        eliminar } = usePeticiones("productos");
+
+    const { notificar } = useNotificaciones()
+    const navegar = useNavigate();
 
     useEffect(() => {
         const obtenerProductos = async () => {
             try {
-                const respuesta = await listarProductos();
+                const respuesta = await listarTodo();
                 setListaProductos(respuesta);
                 setListaFiltrada(respuesta);
             } catch (error) {
-                setError("Error al cargar los productos.");
+                notificar("Error al cargar los productos.", "error");
             }
         };
         obtenerProductos();
@@ -46,37 +55,39 @@ const ProveedorProductos = ({ children }) => {
 
     const crearNuevoProducto = async (datos) => {
         try {
-            const respuesta = await crearProductos(datos);
-            const nuevosProductos = await listarProductos();
+            const respuesta = await crear(datos);
+            const nuevosProductos = await listarTodo();
             setListaProductos(nuevosProductos);
             setListaFiltrada(nuevosProductos);
+            notificar("Producto creado correctamente", "exito");
         } catch (error) {
-            setError("Error al crear el producto.");
+            notificar("Error al crear el producto.", "error");
         }
     };
     const editarProductos = async (datos) => {
         try {
-            const respuesta = await editarProducto(datos);
-            const nuevosDatos = await listarProductos();
+            const respuesta = await editarPorId(datos);
+            const nuevosDatos = await listarTodo();
             setListaProductos(nuevosDatos);
             setListaFiltrada(nuevosDatos);
-            setMensaje("Producto editado correctamente.");
+            notificar("Producto editado correctamente", "exito");
+            navegar("/todos-los-productos")
 
         } catch (error) {
-            setError("Error al editar el producto.");
+            notificar("Error al editar el producto.", "error");
         }
     };
 
     const borrarProducto = async (id) => {
         try {
-            const respuesta = await eliminarProducto(id);
-            const datos = await listarProductos();
+            const respuesta = await eliminar(id);
+            const datos = await listarTodo();
             setListaProductos(datos);
             setListaFiltrada(datos);
-            setMensaje("Producto eliminado correctamente.");
+            notificar("Producto eliminado correctamente", "exito");
 
         } catch (error) {
-            setError("Error al eliminar el producto.");
+            notificar("Error al eliminar el producto.", "error");
         }
     };
 
@@ -96,7 +107,7 @@ const ProveedorProductos = ({ children }) => {
                 .includes(nombre.toLowerCase()),
         );
         if (resultadoFiltro.length === 0) {
-            setMensaje("No se encontraron productos con ese nombre.");
+            notificar("No se encontraron productos con ese nombre", "error");
         }
         setListaFiltrada(resultadoFiltro);
     }
@@ -107,7 +118,7 @@ const ProveedorProductos = ({ children }) => {
             producto.weight <= Number(peso)
         );
         if (resultadoFiltro.length === 0) {
-            setMensaje("No se encontraron productos con ese peso.");
+            notificar("No se encontraron productos con ese peso.", "error");
         }
         setListaFiltrada(resultadoFiltro);
     }
@@ -118,7 +129,7 @@ const ProveedorProductos = ({ children }) => {
             producto.price <= Number(precio)
         );
         if (resultadoFiltro.length === 0) {
-            setMensaje("No se encontraron productos con ese precio.");
+            notificar("No se encontraron productos con ese precio.", "error");
         }
         setListaFiltrada(resultadoFiltro);
     }
@@ -178,15 +189,13 @@ const ProveedorProductos = ({ children }) => {
         const errores = validarProducto(producto);
 
         if (errores.length > 0) {
-            setError(errores.join(" "));
+            notificar(errores.join(" "), "error");
             return;
         }
         try {
             await crearNuevoProducto(producto);
             limpiarFormulario();
-            setMensaje("Producto creado correctamente.");
         } catch (error) {
-            setError("Error al crear el producto.");
         }
     };
 
@@ -202,9 +211,7 @@ const ProveedorProductos = ({ children }) => {
         try {
             await editarProductos(producto);
             limpiarFormulario();
-            setMensaje("Producto editado correctamente.");
         } catch (error) {
-            setError("Error al editar el producto.");
         }
     };
 
@@ -213,9 +220,6 @@ const ProveedorProductos = ({ children }) => {
         if (productoEncontrado) {
             setProducto(productoEncontrado);
         }
-    }
-    const confirmar = (valor) => {
-        setConfirmacion(valor);
     }
 
     const exportar = {
@@ -239,7 +243,6 @@ const ProveedorProductos = ({ children }) => {
         limpiarFormulario,
         cargarProductoPorId,
         enviarFormularioProductoEditado,
-        confirmar,
         mensaje,
         error,
     };

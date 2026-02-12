@@ -49,6 +49,16 @@ const Registro = () => {
           onChange={(evento) => actualizarDato(evento)}
         />
 
+        <label htmlFor="password">Repetir contraseña</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Mínimo 8 caracteres"
+          value={datosSesion.confirmPassword}
+          onChange={(evento) => actualizarDato(evento)}
+        />
+
         <input
           type="button"
           value="Registrarme"

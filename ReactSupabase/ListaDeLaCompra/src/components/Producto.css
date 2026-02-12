@@ -1,15 +1,14 @@
+/* Contenedor principal */
 .producto {
     position: relative;
     border: 2px solid #9b59b6;
-    padding: 10px 15px 10px 80px; /* espacio a la izquierda para iconos */
+    padding: 10px 15px 10px 80px;
     border-radius: 5px;
     background-color: #fff;
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .producto:hover {
@@ -18,6 +17,7 @@
     background-color: #f4ecf7;
 }
 
+/* Iconos borrar y editar */
 .borrar,
 .editar {
     position: absolute;
@@ -34,9 +34,7 @@
     height: 26px;
     cursor: pointer;
     opacity: 0.85;
-    transition:
-        transform 0.15s,
-        opacity 0.15s;
+    transition: transform 0.15s, opacity 0.15s;
 }
 
 .borrar img:hover,
@@ -45,6 +43,7 @@
     opacity: 1;
 }
 
+/* Títulos y textos */
 .producto h2 {
     font-size: 1rem;
     margin: 0;
@@ -57,11 +56,36 @@
     font-size: 0.9rem;
 }
 
+/* Imagen del producto */
 .imagen-producto img {
     max-width: 80px;
     border-radius: 5px;
 }
 
+/* NUEVO: Estilos para sumar/restar */
+.sumar img,
+.restar img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: transform 0.15s, opacity 0.15s;
+}
+
+.sumar img:hover,
+.restar img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Contenedor para sumar/restar y cantidad */
+.sumar,
+.restar {
+    display: flex;
+    align-items: center;
+}
+
+/* Confirmación */
 .confirmacion {
     position: absolute;
     inset: 0;
